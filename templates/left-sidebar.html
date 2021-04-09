@@ -46,7 +46,7 @@
 										<li><a href="#">Nisl tempus</a></li>
 									</ul>
 								</li>
-								<li class="current"><a href="/left-sidebar">Left Sidebar</a></li>
+								<li class = "current"><a href="/left-sidebar">Left Sidebar</a></li>
 								<li><a href="/right-sidebar">Right Sidebar</a></li>
 								<li><a href="/no-sidebar">No Sidebar</a></li>
 							</ul>
@@ -322,7 +322,7 @@
 						</div>
 						<div id="copyright">
 							<ul>
-								<li>&copy; Untitled.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+								<li>&copy; How Much Do They Know.</li>
 							</ul>
 						</div>
 					</div>
@@ -331,12 +331,12 @@
 		</div>
 
 		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.dropotron.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+			<script type='text/javascript' src="{{url_for('static', filename='assets/js/jquery.min.js')}}"></script>
+			<script src="{{url_for('static', filename = 'assets/js/jquery.dropotron.min.js')}}"></script>
+			<script src="{{url_for('static', filename = 'assets/js/browser.min.js')}}"></script>
+			<script src="{{url_for('static', filename = 'assets/js/breakpoints.min.js')}}"></script>
+			<script src="{{url_for('static', filename = 'assets/js/util.js')}}"></script>
+			<script src="{{url_for('static', filename = 'assets/js/main.js')}}"></script>
 
 	</body>
 </html>

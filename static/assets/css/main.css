@@ -1621,6 +1621,15 @@ input, select, textarea {
 			margin: 0 0 2em 0;
 		}
 
+		.image.logo {
+			display: inline-block;
+			text-align: left;
+			width: 10em;
+			height: 10em;
+			position: relative;
+			margin-bottom: 2em;
+		}
+
 /* Button */
 
 	input[type="button"],

@@ -4,13 +4,15 @@
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
-<html>
+<html lang = 'en'>
 	<head>
-		<title>Escape Velocity by HTML5 UP</title>
+		<title>How Much Do They Know </title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="{{url_for('static', filename = 'assets/css/main.css')}}" />
+		<link rel = "icon" types = "image/png" href = "../static/images/favicon.ico" />
 	</head>
+		
 	<body class="homepage is-preload">
 		<div id="page-wrapper">
 
@@ -19,8 +21,9 @@
 
 					<!-- Logo -->
 						<div id="logo">
-							<h1><a href="/">Escape Velocity</a></h1>
-							<p>A free responsive site template by HTML5 UP</p>
+							<img class = "image logo" src = "../static/images/Logo.png" alt = "" />
+							<h1><a href = "/">How Much Do They Know</a></h1>
+							<p>A privacy awareness initiative</p>
 						</div>
 
 					<!-- Nav -->
@@ -262,7 +265,7 @@
 						</div>
 						<div id="copyright">
 							<ul>
-								<li>&copy; Untitled.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+								<li>&copy; How Much Do They Know.</li>
 							</ul>
 						</div>
 					</div>
@@ -271,12 +274,12 @@
 		</div>
 
 		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.dropotron.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+			<script type='text/javascript' src="{{url_for('static', filename='assets/js/jquery.min.js')}}"></script>
+			<script src="{{url_for('static', filename = 'assets/js/jquery.dropotron.min.js')}}"></script>
+			<script src="{{url_for('static', filename = 'assets/js/browser.min.js')}}"></script>
+			<script src="{{url_for('static', filename = 'assets/js/breakpoints.min.js')}}"></script>
+			<script src="{{url_for('static', filename = 'assets/js/util.js')}}"></script>
+			<script src="{{url_for('static', filename = 'assets/js/main.js')}}"></script>
 
 	</body>
-</html>
+</html>s
