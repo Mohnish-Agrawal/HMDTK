@@ -38,46 +38,47 @@ from retrieval import rerankPassages
 # ]
 
 def init(fileName):
-	global getRelevantDocs
-	data = open("whatsapp.txt", encoding = "utf-8")
+    global getRelevantDocs
+    data = open("whatsapp.txt", encoding="utf-8")
 
-	sentences = list()
-	topics = list()
-	lastIndex = 0
+    sentences = list()
+    topics = list()
+    lastIndex = 0
 
-	for lines in data:
-		if "Back to"  in lines or len(lines[:-1]) == 0:
-			continue
-		if len(lines[:-1].split()) > 5:
-			sentences.append(lines[:-1])
-		else:
-			sentencesUnderTopic = sentences[lastIndex:]
-			lastIndex = len(sentences)
-			topics.append(lines[:-1])
-			if len(sentencesUnderTopic) == 0:
-				continue
-			for s in sentencesUnderTopic:
-				topics[-1] += ". " + s
-			# print(topics[-1])
-			# print("-----------------------------------")
+    for lines in data:
+        if "Back to" in lines or len(lines[:-1]) == 0:
+            continue
+        if len(lines[:-1].split()) > 5:
+            sentences.append(lines[:-1])
+        else:
+            sentencesUnderTopic = sentences[lastIndex:]
+            lastIndex = len(sentences)
+            topics.append(lines[:-1])
+            if len(sentencesUnderTopic) == 0:
+                continue
+            for s in sentencesUnderTopic:
+                topics[-1] += ". " + s
+            # print(topics[-1])
+            # print("-----------------------------------")
 
-	print("File imported!")
+    print("File imported!")
 
-	getRelevantDocs = rerankPassages()
-	getRelevantDocs.fit(topics)
+    getRelevantDocs = rerankPassages()
+    getRelevantDocs.fit(topics)
 
-	print("File fitted")
+    print("File fitted")
 
-def getResults(questions, n_ans = 2):
-	global getRelevantDocs
 
-	mu = 0.6
-	answers = list()
-	for q in questions:
-		ans = getRelevantDocs.rankDocuments(q, mu)[:n_ans]
-		answers.append(ans)
+def getResults(questions, n_ans=2):
+    global getRelevantDocs
 
-	return answers
+    mu = 0.6
+    answers = list()
+    for q in questions:
+        ans = getRelevantDocs.rankDocuments(q, mu)[:n_ans]
+        answers.append(ans)
+
+    return answers
 
 # init("whatsapp.txt")
 # questions = [
