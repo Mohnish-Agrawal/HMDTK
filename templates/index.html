@@ -10,6 +10,16 @@
   			scroll-behavior: smooth;
 		}
 	</style>
+
+	<!-- <style text="text/css">
+
+	#drop_zone {
+	  border: 5px solid blue;
+	  width:  200px;
+	  height: 100px;
+	}
+
+	</style> -->
 	<head>
 		<title>How Much Do They Know </title>
 		<meta charset="utf-8" />
@@ -17,7 +27,10 @@
 		<link rel="stylesheet" href="{{url_for('static', filename = 'assets/css/main.css')}}" />
 		<link rel = "icon" types = "image/png" href = "../static/images/favicon.ico" />
 	</head>
-		
+	<!-- <div id="drop_zone" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
+	  <p>Drag one or more files to this Drop Zone ...</p>
+	</div> -->
+
 	<body class="homepage is-preload">
 		<div id="page-wrapper">
 
@@ -310,6 +323,7 @@
 			<script src="{{url_for('static', filename = 'assets/js/breakpoints.min.js')}}"></script>
 			<script src="{{url_for('static', filename = 'assets/js/util.js')}}"></script>
 			<script src="{{url_for('static', filename = 'assets/js/main.js')}}"></script>
+			<!-- <script src="{{url_for('static', filename = 'assets/js/drag.js')}}"></script> -->
 
 	</body>
 </html>

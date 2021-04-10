@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+
+<html>
+	<style text="text/css">
+
+		#drop_zone {
+		  border: 5px solid blue;
+		  width:  200px;
+		  height: 100px;
+		}
+
+	</style>
+
+	<div id="drop_zone" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
+	  <p>Drag one or more files to this Drop Zone ...</p>
+	</div>
+
+	<script src="{{url_for('static', filename = 'assets/js/drag.js')}}"></script>
+</html>	

@@ -46,13 +46,25 @@ def init(fileName):
 	lastIndex = 0
 
 	for lines in data:
+		if "Back to"  in lines or len(lines[:-1]) == 0:
+			continue
 		if len(lines[:-1].split()) > 5:
 			sentences.append(lines[:-1])
+		else:
+			sentencesUnderTopic = sentences[lastIndex:]
+			lastIndex = len(sentences)
+			topics.append(lines[:-1])
+			if len(sentencesUnderTopic) == 0:
+				continue
+			for s in sentencesUnderTopic:
+				topics[-1] += ". " + s
+			# print(topics[-1])
+			# print("-----------------------------------")
 
 	print("File imported!")
 
 	getRelevantDocs = rerankPassages()
-	getRelevantDocs.fit(sentences)
+	getRelevantDocs.fit(topics)
 
 	print("File fitted")
 
@@ -66,3 +78,17 @@ def getResults(questions, n_ans = 2):
 		answers.append(ans)
 
 	return answers
+
+# init("whatsapp.txt")
+# questions = [
+# 	"Is my Information (camera access, location access, contacts) data being stored collected by this website",
+# 	"Is my information data being shared to anyone with without my consent",
+# 	"What are some of the new and updated changes in these documents policies terms of service"
+# ]
+
+# answers = getResults(questions, 3)
+
+# for a in answers:
+# 	print("question answer:")
+# 	for t in a:
+# 		print(t,"\n")
