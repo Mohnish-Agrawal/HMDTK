@@ -1,35 +1,11 @@
 Information You Provide to Us
-We collect information you provide to us directly when you use the Services. This includes:	
-
-Account information		
-If you create a Reddit account, we may require you to provide a username and password. Your username is public, and it doesn’t have to be related to your real name. You may also provide other account information, like an email address, bio, or profile picture. We also store your user account preferences and settings.	
-
-Content you submit		
-We collect the content you submit to the Services. This includes your posts and comments including saved drafts, videos you broadcast via RPAN, your messages with other users (e.g., private messages, chats, and modmail), and your reports and other communications with moderators and with us. Your content may include text, links, images, gifs, and videos.	
-
-Actions you take		
-We collect information about the actions you take when using the Services. This includes your interactions with content, like voting, saving, hiding, and reporting. It also includes your interactions with other users, such as following, friending, and blocking. We collect your interactions with communities, like your subscriptions or moderator status.	
-
-Transactional information		
-If you purchase products or services from us (e.g., Reddit Premium or Reddit Coins), we will collect certain information from you, including your name, address, email address, and information about the product or service you are purchasing. Reddit uses industry-standard payment processor services (for example, Stripe) to handle payment information.	
-
-Other information		
-You may choose to provide other information directly to us. For example, we may collect information when you fill out a form, participate in Reddit-sponsored activities or promotions, apply for a job, request customer support, or otherwise communicate with us.	
-
+We collect information you provide to us directly when you use the Services. This includes:Account information, Content you submit, Actions you take, Transactional information, Other information.
 
 Information We Collect Automatically
-When you access or use our Services, we may also automatically collect information about you. This includes:	
-
-Log and usage data		
-We may log information when you access and use the Services. This may include your IP address, user-agent string, browser type, operating system, referral URLs, device information (e.g., device IDs), device settings, pages visited, links clicked, the requested URL, and search terms. Except for the IP address used to create your account, Reddit will delete any IP addresses collected after 100 days.	
+When you access or use our Services, we may also automatically collect information about you. This includes:Log and usage data - This may include your IP address, user-agent string, browser type, operating system, referral URLs, device information (e.g., device IDs), device settings, pages visited, links clicked, the requested URL, and search terms, Location information and others.
 
 Information collected from cookies and similar technologies		
 We may receive information from cookies, which are pieces of data your browser stores and sends back to us when making requests, and similar technologies. We use this information to improve your experience, understand user activity, personalize content and advertisements, and improve the quality of our Services. For example, we store and retrieve information about your preferred language and other settings. See our Cookie Notice for more information about how Reddit uses cookies. For more information on how you can disable cookies, please see “Your Choices” below.	
-
-Location information
-
-
-We may receive and process information about your location. For example, with your consent, we may collect information about the specific location of your mobile device (for example, by using GPS or Bluetooth). We may also receive location information from you when you choose to share such information on our Services, including by associating your content with a location, or we may derive your approximate location from other information about you, including your IP address.	
 
 
 Information Collected from Other Sources
@@ -57,15 +33,9 @@ We partner with audience measurement companies (including Quantcast and Nielsen)
 Information Collected from Advertisers and Potential Advertisers
 If you use Reddit Ads (Reddit’s self-serve ads platform at ads.reddit.com) we collect some additional information. To sign up for Reddit Ads, you must provide your name, email address, and information about your company. If you purchase advertising services, you will need to provide transactional information as described above, and we may also require additional documentation to verify your identity. When using Reddit Ads, we may record a session replay of your visit for customer service, troubleshooting, and usability research purposes.	
 
+Log and usage data		
+We may log information when you access and use the Services. This may include your IP address, user-agent string, browser type, operating system, referral URLs, device information (e.g., device IDs), device settings, pages visited, links clicked, the requested URL, and search terms. Except for the IP address used to create your account, Reddit will delete any IP addresses collected after 100 days
 
-We use information about you to:
-
-Provide, maintain, and improve the Services;
-Research and develop new services;
-Help protect the safety of Reddit and our users, which includes blocking suspected spammers, addressing abuse, and enforcing the Reddit User Agreement and our other policies;
-Send you technical notices, updates, security alerts, invoices, and other support and administrative messages;
-Provide customer service;
-Communicate with you about products, services, offers, promotions, and events, and provide other news and information we think will be of interest to you (for information about how to opt out of these communications, see “Your Choices” below);
-Monitor and analyze trends, usage, and activities in connection with our Services;
-Measure the effectiveness of ads shown on our Services; and
+We use information about you: Provide, maintain, and improve the Services; Research and develop new services; Help protect the safety of Reddit and our users, which includes blocking suspected spammers, addressing abuse, and enforcing the Reddit User Agreement and our other policies; Send you technical notices, updates, security alerts, invoices, and other support and administrative messages;
+Provide customer service; Communicate with you about products, services, offers, promotions, and events, and provide other news and information we think will be of interest to you (for information about how to opt out of these communications, see “Your Choices” below); Monitor and analyze trends, usage, and activities in connection with our Services; Measure the effectiveness of ads shown on our Services; and
 Personalize the Services, and provide and optimize advertisements, content, and features that match user profiles or interests.

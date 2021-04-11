@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<!DOCTYPE html>
+<html>
+<HEAD>
+	<style type="text/css">
+		.card {
+			  width: 100%;
+			  height: auto;
+			  margin: 35px;
+			  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2);
+			  border-radius: 5px;
+			  position: relative;
+			  z-index: 1;
+			  background: inherit;
+			  overflow: hidden;
+			  padding: 15px;
+			  /*text-decoration-color: #ffffff*/
+			}
+
+			.card:before {
+			  content: "";
+			  position: absolute;
+			  background: inherit;
+			  z-index: -1;
+			  top: 0;
+			  left: 0;
+			  right: 0;
+			  bottom: 0;
+			  box-shadow: inset 0 0 2000px rgba(201, 201, 201, .5);
+			  filter: blur(10px);
+			  margin: -20px;
+			}
+	</style>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="{{url_for('static', filename = 'assets/css/main.css')}}" />
+</HEAD>
+	<body class="homepage is-preload" style="align-items: center; justify-content: center;">
+		<div id = "page-wrapper">
+			<section id="header" class="wrapper" style="height: 250px;">
+				<div id="logo">
+					<h1>{{result.0}}</h1>
+				</div>
+			</section>
+		<!-- </div> -->
+			<section  class="wrapper style2">
+				<div class="container">
+					{% for key, value in result.1.items() %}
+						<div class = "card">
+							<center><h3 >{{key}}</h3></center>
+							<p>
+								<ul>
+								{% for l in value %}
+									<li>{{l}}</li>
+								{% endfor %}
+								</ul>
+							</p>
+						</div>
+					{% endfor %}
+				</div>
+			</section>
+	</body>	
+
+</html>
