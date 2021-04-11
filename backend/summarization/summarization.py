@@ -63,7 +63,7 @@ def init(fileName):
 				topics[0] = lines[:-1]
 			# print(topics[-1])
 			topics.append(lines[:-1])
-			print("-----------------------------------")
+			# print("-----------------------------------")
 
 	print("File imported!")
 
@@ -72,18 +72,21 @@ def init(fileName):
 
 	print("File fitted")
 
-def getResults(questions, n_ans = 2):
-	global getRelevantDocs
 
-	mu = 0.6
-	answers = list()
-	for q in questions:
-		ans = getRelevantDocs.rankDocuments(q, mu)[:n_ans]
-		answers.append(ans)
 
-	return answers
+def getResults(questions, n_ans=2):
+    global getRelevantDocs
 
-init("whatsapp.txt")
+    mu = 0.6
+    answers = list()
+    for q in questions:
+        ans = getRelevantDocs.rankDocuments(q, mu)[:n_ans]
+        answers.append(ans)
+
+    return answers
+
+
+# init("whatsapp.txt")
 # questions = [
 # 	"Is my Information (camera access, location access, contacts) data being stored collected by this website",
 # 	"Is my information data being shared to anyone with without my consent",
