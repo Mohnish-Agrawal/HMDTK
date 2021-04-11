@@ -39,7 +39,7 @@ from retrieval import rerankPassages
 
 def init(fileName):
 	global getRelevantDocs
-	data = open("whatsapp.txt", encoding = "utf-8")
+	data = open(fileName, encoding = "utf-8")
 
 	sentences = list()
 	topics = [""]
@@ -57,8 +57,9 @@ def init(fileName):
 				topics[-1] = topics[-1] + ". " + lines[:-1]
 				# print(topics[-1])
 				continue
+			t = topics[-1]
 			for s in sentencesUnderTopic:
-				topics[-1] += ". " + s
+				topics.append(t + ". " + s)
 			if topics[0] == "" and len(topics) == 1:
 				topics[0] = lines[:-1]
 			# print(topics[-1])

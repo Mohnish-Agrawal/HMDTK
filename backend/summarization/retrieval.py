@@ -11,6 +11,39 @@ import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 from sentence_transformers import SentenceTransformer, util
 from sentence_transformers.cross_encoder import CrossEncoder
+from gensim.summarization.bm25 import BM25
+
+class bm25:
+
+	def __init__(self, nlp):
+		self.tokenize = lambda text: [token.lemma_ for token in nlp(text)]
+		self.bm25 = None
+		self.passages = None
+
+	def preprocess(self, doc):
+		passages = [p for p in doc.split('\n') if p and not p.startswith('=')]
+		return passages
+
+	def fit(self, docs):
+			# passages = list(itertools.chain(*map(self.preprocess, docs)))
+		corpus = [self.tokenize(p) for p in docs]
+		self.bm25 = BM25(corpus)
+		self.passages = docs
+
+	def most_similar(self, question, topn=10):
+		tokens = self.tokenize(question)
+		# average_idf = sum(map(lambda k: float(self.bm25.idf[k]), self.bm25.idf.keys())) / len(self.bm25.idf.keys())
+		scores = self.bm25.get_scores(tokens)
+		pairs = [(s, i) for i, s in enumerate(scores)]
+		pairs.sort(reverse=True)
+		passages = [self.passages[i] for _, i in pairs[:topn]]
+		return passages
+	
+	def rankDocuments(self, query):
+		tokens = self.tokenize(query)
+		# average_idf = sum(map(lambda k: float(self.bm25.idf[k]), self.bm25.idf.keys())) / len(self.bm25.idf.keys())
+		scores = self.bm25.get_scores(tokens)
+		return np.array([s for i,s in enumerate(scores)]).reshape((1,len(self.passages)))
 
 class tfidf:
 
@@ -73,15 +106,18 @@ class rerankPassages:
 		SPACY_MODEL = os.environ.get("SPACY_MODEL", "en_core_web_sm")
 		nlp = spacy.load(SPACY_MODEL, disable = ["ner","parser","textcat"])
 		self.tfidf_ranking = tfidf(nlp)
-		self.sbert_ranking = sbert()
+		self.bm25_ranking = bm25(nlp)
+		# self.sbert_ranking = sbert()
+
 		self.cross_encoder = CrossEncoder("cross-encoder/ms-marco-TinyBERT-L-6")
 		self.document = None
 	
 	def fit(self, document):
 		self.document = document
 		self.tfidf_ranking.preprocessDocument(document)
-		self.sbert_ranking.fit(document)
-	
+		# self.sbert_ranking.fit(document)
+		self.bm25_ranking.fit(document)
+
 	def matchParaSent(self, s, p):
 		
 		sList = s.split()
@@ -130,13 +166,13 @@ class rerankPassages:
 		return reranked_passages
 
 	def rankDocuments(self, query, mu):
-		# bm25_scores = self.bm25_ranking.rankDocuments(query)
+		bm25_scores = self.bm25_ranking.rankDocuments(query)
 		tfidf_scores = self.tfidf_ranking.rankDocuments(query)
-		sbert_scores = self.sbert_ranking.rankDocuments(query)
+		# sbert_scores = self.sbert_ranking.rankDocuments(query)
 		#Combined scoring
 		# mu = 0.7
 		# k = 10
-		rrf = mu*sbert_scores + (1-mu)*tfidf_scores
+		rrf = mu*bm25_scores + (1-mu)*tfidf_scores
 		# rrf = 1/(k+c) + 1/(k + bm25_scores)
 		# print(rrf)
 		# print(np.shape(rrf))

@@ -1,5 +1,6 @@
 from flask import Flask, render_template, url_for, request
 from werkzeug.utils import secure_filename
+from test import randomout
 
 app = Flask(__name__)
 
@@ -24,7 +25,7 @@ def upload_file():
    if request.method == 'POST':
       f = request.files['file']
       f.save(secure_filename(f.filename))
-      return 'file uploaded successfully'
+      return randomout()
 
 # @app.route('/upload')
 # def upload_file():
