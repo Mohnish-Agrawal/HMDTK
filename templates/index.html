@@ -9,6 +9,125 @@
 		html {
   			scroll-behavior: smooth;
 		}
+
+		#alignTable{
+			text-align: center;
+			vertical-align: middle;
+		}
+
+		#author{
+            border-radius: 50% ;
+            width: 300px ;
+            height: 300px ;
+            background-size: cover;     
+        }
+
+		#addShadow{
+			box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+			
+		}
+		:root {
+			--gutter: 20px;
+		}
+
+		.app {
+			  padding: var(--gutter) 0;
+			  display: grid;
+			  grid-gap: var(--gutter) 0;
+			  grid-template-columns: var(--gutter) 1fr var(--gutter);
+			  align-content: center;
+			  align-self: center;
+			}
+
+			.app > * {
+			  grid-column: 2 / -2;
+			}
+
+			.app > .full {
+			  grid-column: 1 / -1;
+			}
+
+			.hs {
+			  display: grid;
+			  grid-gap: calc(var(--gutter) / 5);
+			  grid-template-columns: 10px repeat(6, calc(30% - var(--gutter) * 2)) 10px;
+			  grid-template-rows: minmax(150px, 1fr);
+			  
+			  overflow-x: scroll;
+			  scroll-snap-type: x proximity;
+			  padding-bottom: calc(.75 * var(--gutter));
+			  margin-bottom: calc(-.5 * var(--gutter));
+
+			}
+
+			.hs:before,
+			.hs:after {
+			  content: '';
+			}
+
+			/* Hide scrollbar */
+			.hide-scroll {
+			  overflow-y: hidden;
+			  overflow-x: hidden;
+			  margin-bottom: calc(-.1 * var(--gutter));
+			}
+
+			ul {
+			  list-style: none;
+			  padding: 0;
+
+			}
+			.app {
+			  width: 100%;
+			  /*height: 400px;*/
+			  overflow-y: scroll;
+			}
+
+
+			.hs > div,
+			.item {
+			  scroll-snap-align: center;
+			  overflow-y: hidden;
+			  overflow-x: hidden;
+			  padding: calc(var(--gutter) / 2 * 1.5);
+			  display: flex;
+			  flex-direction: column;
+			  justify-content: center;
+			  align-items: center;
+			  background: #fff;
+			  border-radius: 8px;
+			  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+			  height : 250px;
+			  width : 250px;
+			  transition: transform 1s;
+			}
+
+			.hs div:hover{
+				transform: scale(0.9);
+				border-radius: 8px;
+			 	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+			 	background: #eeeeee;
+			 	
+			}
+
+			::-webkit-scrollbar{
+				display : none;
+			}
+
+			input [type = file]{
+				display: none;
+			}
+
+			label {
+				border-radius: 1px solid white;
+				text-align: center;
+				color: #fff
+				border-radius:4px;
+				margin: auto;
+				padding: 10px;
+				display: block;
+				background-color: #0095ff: 
+			}
 	</style>
 
 	<!-- <style text="text/css">
@@ -25,6 +144,13 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="{{url_for('static', filename = 'assets/css/main.css')}}" />
+		<link rel="stylesheet" href="{{url_for('static', filename = 'assets/css/table.css')}}" />
+		<link rel="stylesheet" type="text/css" href="{{url_for('static', filename = 'assets/vendor/bootstrap/css/bootstrap.min.css')}}">
+		<link rel="stylesheet" type="text/css" href="{{url_for('static', filename = 'assets/fonts/fontawesome-free-5.15.3-web/css/all.css')}}">
+		<link rel="stylesheet" type="text/css" href="{{url_for('static', filename = 'assets/vendor/animate/animate.css')}}">
+		<link rel="stylesheet" type="text/css" href="{{url_for('static', filename = 'assets/vendor/select2/select2.min.css')}}">
+		<link rel="stylesheet" type="text/css" href="{{url_for('static', filename = 'assets/vendor/perfect-scrollbar/perfect-scrollbar.css')}}">
+		<link rel="stylesheet" type="text/css" href="{{url_for('static', filename = 'assets/css/util.css')}}">
 		<link rel = "icon" types = "image/png" href = "../static/images/favicon.ico" />
 	</head>
 	<!-- <div id="drop_zone" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
@@ -48,25 +174,7 @@
 						<nav id="nav">
 							<ul>
 								<!-- <li class="current"><a href="/">Home</a></li> -->
-								<li>
-									<a href="#About us">Introduction</a>
-									<ul>
-										<li><a href="#">Lorem ipsum</a></li>
-										<li><a href="#">Magna veroeros</a></li>
-										<li><a href="#">Etiam nisl</a></li>
-										<li>
-											<a href="#">Sed consequat</a>
-											<ul>
-												<li><a href="#">Lorem dolor</a></li>
-												<li><a href="#">Amet consequat</a></li>
-												<li><a href="#">Magna phasellus</a></li>
-												<li><a href="#">Etiam nisl</a></li>
-												<li><a href="#">Sed feugiat</a></li>
-											</ul>
-										</li>
-										<li><a href="#">Nisl tempus</a></li>
-									</ul>
-								</li>
+								<li><a href="#About us">Introduction</a></li>
 								<!-- <li><a href="#About us">Introduction</a></li> -->
 								<li><a href="#summary">Privacy policies</a></li>
 								<li><a href="#profiling">Profiling Users</a></li>
@@ -82,16 +190,13 @@
 					<div class="title">Introduction</div>
 					<div class="container">
 						<p class="style1">So in case you were wondering what this is all about ...</p>
-						<p class="style2">
-							Escape Velocity is a free responsive<br class="mobile-hide" />
-							site template by <a href="http://html5up.net" class="nobr">HTML5 UP</a>
-						</p>
-						<p class="style3">It's <strong>responsive</strong>, built on <strong>HTML5</strong> and <strong>CSS3</strong>, and released for
-						free under the <a href="http://html5up.net/license">Creative Commons Attribution 3.0 license</a>, so use it for any of
-						your personal or commercial projects &ndash; just be sure to credit us!</p>
-						<ul class="actions">
-							<li><a href="#" class="button style3 large">Proceed</a></li>
-						</ul>
+						<p class = "style2">Our goal is to spread awareness about your privacy, and inform you about what data a company collects from you and how this information can be used to exploit you.</p>
+
+						<p class="style2">Some of the companies profile us even when we don't use their platforms. The extent of how much they can profile us and how much they can predict is disturbing.</p>
+
+						<p class = "style2">This is a one stop resource for all things related to privacy. Here, we will show you what data exactly a company collects from you, as simple as possible. You can also ask specific questions, and our ML model will answer them, based on that company's privacy policy. You can also sign up for a newsletter that will keep you updated of major changes in a company's privacy policy. </p>
+
+						<p class = "style2">We have also developed a model that simulates how these companies profile their users. With just your search history, one can find out so much about you, and this information can be used to exploit you</p>
 					</div>
 				</section>
 
@@ -100,65 +205,544 @@
 					<div class="title">Privacy policies</div>
 					<div class="container">
 
-						<!-- Image -->
-							<a href="#" class="image featured">
-								<img src="../static/images/pic01.jpg" alt="" />
-							</a>
+				<!--table-->
+				<!-- 	<div class="limiter"> -->
+				<div class="container-table100">
+					<div class="wrap-table100">
+						<h1 style="font-family: Montserrat-Bold; text-align:center;">What do they know?</h1>
+						<br>
+						<h5 style="font-family: Montserrat-SemiBold; text-align:center;">Click on the logos to find out more.</h5>
+						<br>
+						<div class="table100 ver1 m-b-110">
+							<table data-vertable="ver1" id = "addShadow">
+								<thead>
+									<tr class="row100 head">
+										<th class="column100 column1" data-column="column1" id = "alignTable">Do they Know?</th>
+										<th class="column100 column2" data-column="column2" id = "alignTable"><a href="https://policies.google.com/privacy?hl=en-US#infocollect" class="fab fa-google fa-3x" style="color: white;"></a></th>
+										<th class="column100 column3" data-column="column3" id = "alignTable"><a href="https://www.apple.com/legal/privacy/en-ww/" class="fab fa-apple fa-3x" style="color: white;"></a></th>
+										<th class="column100 column4" data-column="column4" id = "alignTable"><a href="https://privacy.microsoft.com/en-US/" class="fab fa-microsoft fa-3x" style="color: white;"></a></th>
+										<th class="column100 column5" data-column="column5" id = "alignTable"><a href="https://www.amazon.com/gp/help/customer/display.html?nodeId=GX7NJQ4ZB8MHFRNJ" class="fab fa-amazon fa-3x" style="color: white;"></a></th>
+										<th class="column100 column6" data-column="column6" id = "alignTable"><a href="https://www.facebook.com/about/privacy/previous" class="fab fa-facebook fa-3x" style="color: white;"></a></th>
+										<th class="column100 column7" data-column="column7" id = "alignTable"><a href="https://twitter.com/en/privacy" class="fab fa-twitter fa-3x" style="color: white;"></a></th>
+										<th class="column100 column8" data-column="column8" id = "alignTable"><a href="https://www.linkedin.com/legal/privacy-policy" class="fab fa-linkedin fa-3x" style="color: white;"></a></th>
+										<th class="column100 column9" data-column="column9" id = "alignTable"><a href="https://www.redditinc.com/policies/privacy-policy" class="fab fa-reddit fa-3x" style="color: white;"></a></th>
+										<th class="column100 column10" data-column="column10" id = "alignTable"><a href="https://www.tiktok.com/legal/privacy-policy?lang=en" class="fab fa-tiktok fa-3x" style="color: white;"></a></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr class="row100">
+										<td class="column100 column1" data-column="column1">Name</td>
+										<td class="column100 column2" data-column="column2"><i class="fas fa-check fa-lg"></i></td> <!-- Google -->
+										<td class="column100 column3" data-column="column3"><i class="fas fa-check fa-lg"></i></td> <!-- Apple -->
+										<td class="column100 column4" data-column="column4"><i class="fas fa-check fa-lg"></i></td> <!-- Microsoft -->
+										<td class="column100 column5" data-column="column5"><i class="fas fa-check fa-lg"></i></td> <!-- Amazon -->
+										<td class="column100 column6" data-column="column6"><i class="fas fa-check fa-lg"></i></td> <!-- Facebook -->
+										<td class="column100 column7" data-column="column7"><i class="fas fa-check fa-lg"></i></td> <!-- Twitter -->
+										<td class="column100 column8" data-column="column8"><i class="fas fa-check fa-lg"></i></td> <!-- LinkedIn -->
+										<td class="column100 column9" data-column="column9"><i class="fas fa-check fa-lg"></i></td> <!-- Reddit -->
+										<td class="column100 column10" data-column="column10"><i class="fas fa-check fa-lg"></i></td> <!-- TikTok -->
+									</tr>
 
-						<!-- Features -->
-							<section id="features">
-								<header class="style1">
-									<h2>Dolor consequat feugiat amet veroeros</h2>
-									<p>Feugiat dolor nullam orci pretium phasellus justo</p>
-								</header>
-								<div class="feature-list">
-									<div class="row">
-										<div class="col-6 col-12-medium">
-											<section>
-												<h3 class="icon fa-comment">Mattis velit diam vulputate</h3>
-												<p>Eget mattis at, laoreet vel et velit aliquam diam ante, aliquet sit amet vulputate et magna feugiat laoreet vel velit lorem.</p>
-											</section>
-										</div>
-										<div class="col-6 col-12-medium">
-											<section>
-												<h3 class="icon solid fa-sync">Lorem ipsum dolor sit veroeros</h3>
-												<p>Eget mattis at, laoreet vel et velit aliquam diam ante, aliquet sit amet vulputate et magna feugiat laoreet vel velit lorem.</p>
-											</section>
-										</div>
-										<div class="col-6 col-12-medium">
-											<section>
-												<h3 class="icon fa-image">Pretium phasellus justo lorem</h3>
-												<p>Eget mattis at, laoreet vel et velit aliquam diam ante, aliquet sit amet vulputate et magna feugiat laoreet vel velit lorem.</p>
-											</section>
-										</div>
-										<div class="col-6 col-12-medium">
-											<section>
-												<h3 class="icon solid fa-cog">Tempus sed pretium orci</h3>
-												<p>Eget mattis at, laoreet vel et velit aliquam diam ante, aliquet sit amet vulputate et magna feugiat laoreet vel velit lorem.</p>
-											</section>
-										</div>
-										<div class="col-6 col-12-medium">
-											<section>
-												<h3 class="icon solid fa-wrench">Aliquam consequat et feugiat</h3>
-												<p>Eget mattis at, laoreet vel et velit aliquam diam ante, aliquet sit amet vulputate et magna feugiat laoreet vel velit lorem.</p>
-											</section>
-										</div>
-										<div class="col-6 col-12-medium">
-											<section>
-												<h3 class="icon solid fa-check">Dolore laoreet aliquam mattis</h3>
-												<p>Eget mattis at, laoreet vel et velit aliquam diam ante, aliquet sit amet vulputate et magna feugiat laoreet vel velit lorem.</p>
-											</section>
-										</div>
-									</div>
-								</div>
-								<ul class="actions special">
-									<li><a href="#" class="button style1 large">Get Started</a></li>
-									<li><a href="#" class="button style2 large">More Info</a></li>
-								</ul>
-							</section>
+									<tr class="row100">
+										<td class="column100 column1" data-column="column1">Birthday</td>
+										<td class="column100 column2" data-column="column2"><i class="fas fa-check fa-lg"></i></td> <!-- Google -->
+										<td class="column100 column3" data-column="column3"><i class="fas fa-check fa-lg"></i></td> <!-- Apple -->
+										<td class="column100 column4" data-column="column4"><i class="fas fa-check fa-lg"></i></td> <!-- Microsoft -->
+										<td class="column100 column5" data-column="column5"><i class="fas fa-check fa-lg"></i></td> <!-- Amazon -->
+										<td class="column100 column6" data-column="column6"><i class="fas fa-check fa-lg"></i></td> <!-- Facebook -->
+										<td class="column100 column7" data-column="column7"><i class="fas fa-check fa-lg"></i></td> <!-- Twitter -->
+										<td class="column100 column8" data-column="column8"><i class="fas fa-check fa-lg"></i></td> <!-- LinkedIn -->
+										<td class="column100 column9" data-column="column9"></td> <!-- Reddit -->
+										<td class="column100 column10" data-column="column10"><i class="fas fa-check fa-lg"></i></td> <!-- TikTok -->
+									</tr>
 
+									<tr class="row100">
+										<td class="column100 column1" data-column="column1">Gender</td>
+										<td class="column100 column2" data-column="column2"><i class="fas fa-check fa-lg"></i></td> <!-- Google -->
+										<td class="column100 column3" data-column="column3"><i class="fas fa-check fa-lg"></i></td> <!-- Apple -->
+										<td class="column100 column4" data-column="column4"><i class="fas fa-check fa-lg"></i></td> <!-- Microsoft -->
+										<td class="column100 column5" data-column="column5"><i class="fas fa-check fa-lg"></i></td> <!-- Amazon -->
+										<td class="column100 column6" data-column="column6"><i class="fas fa-check fa-lg"></i></td> <!-- Facebook -->
+										<td class="column100 column7" data-column="column7"><i class="fas fa-check fa-lg"></i></td> <!-- Twitter -->
+										<td class="column100 column8" data-column="column8"><i class="fas fa-check fa-lg"></i></td> <!-- LinkedIn -->
+										<td class="column100 column9" data-column="column9"></td> <!-- Reddit -->
+										<td class="column100 column10" data-column="column10"><i class="fas fa-check fa-lg"></i></td> <!-- TikTok -->
+									</tr>
+
+									<tr class="row100">
+										<td class="column100 column1" data-column="column1">Email Address</td>
+										<td class="column100 column2" data-column="column2"><i class="fas fa-check fa-lg"></i></td> <!-- Google -->
+										<td class="column100 column3" data-column="column3"><i class="fas fa-check fa-lg"></i></td> <!-- Apple -->
+										<td class="column100 column4" data-column="column4"><i class="fas fa-check fa-lg"></i></td> <!-- Microsoft -->
+										<td class="column100 column5" data-column="column5"><i class="fas fa-check fa-lg"></i></td> <!-- Amazon -->
+										<td class="column100 column6" data-column="column6"><i class="fas fa-check fa-lg"></i></td> <!-- Facebook -->
+										<td class="column100 column7" data-column="column7"><i class="fas fa-check fa-lg"></i></td> <!-- Twitter -->
+										<td class="column100 column8" data-column="column8"><i class="fas fa-check fa-lg"></i></td> <!-- LinkedIn -->
+										<td class="column100 column9" data-column="column9"><i class="fas fa-check fa-lg"></i></td> <!-- Reddit -->
+										<td class="column100 column10" data-column="column10"><i class="fas fa-check fa-lg"></i></td> <!-- TikTok -->
+									</tr>
+
+									<tr class="row100">
+										<td class="column100 column1" data-column="column1">Phone Number</td>
+										<td class="column100 column2" data-column="column2"><i class="fas fa-check fa-lg"></i></td> <!-- Google -->
+										<td class="column100 column3" data-column="column3"><i class="fas fa-check fa-lg"></i></td> <!-- Apple -->
+										<td class="column100 column4" data-column="column4"><i class="fas fa-check fa-lg"></i></td> <!-- Microsoft -->
+										<td class="column100 column5" data-column="column5"><i class="fas fa-check fa-lg"></i></td> <!-- Amazon -->
+										<td class="column100 column6" data-column="column6"><i class="fas fa-check fa-lg"></i></td> <!-- Facebook -->
+										<td class="column100 column7" data-column="column7"><i class="fas fa-check fa-lg"></i></td> <!-- Twitter -->
+										<td class="column100 column8" data-column="column8"><i class="fas fa-check fa-lg"></i></td> <!-- LinkedIn -->
+										<td class="column100 column9" data-column="column9"></td> <!-- Reddit -->
+										<td class="column100 column10" data-column="column10"><i class="fas fa-check fa-lg"></i></td> <!-- TikTok -->
+									</tr>
+
+									<tr class="row100">
+										<td class="column100 column1" data-column="column1">Physical Address</td>
+										<td class="column100 column2" data-column="column2"><i class="fas fa-check fa-lg"></i></td> <!-- Google -->
+										<td class="column100 column3" data-column="column3"><i class="fas fa-check fa-lg"></i></td> <!-- Apple -->
+										<td class="column100 column4" data-column="column4"><i class="fas fa-check fa-lg"></i></td> <!-- Microsoft -->
+										<td class="column100 column5" data-column="column5"><i class="fas fa-check fa-lg"></i></td> <!-- Amazon -->
+										<td class="column100 column6" data-column="column6"><i class="fas fa-check fa-lg"></i></td> <!-- Facebook -->
+										<td class="column100 column7" data-column="column7"></td> <!-- Twitter -->
+										<td class="column100 column8" data-column="column8"></td> <!-- LinkedIn -->
+										<td class="column100 column9" data-column="column9"><i class="fas fa-check fa-lg"></i></td> <!-- Reddit -->
+										<td class="column100 column10" data-column="column10"><i class="fas fa-check fa-lg"></i></td> <!-- TikTok -->
+									</tr>
+
+									<tr class="row100">
+										<td class="column100 column1" data-column="column1">Location</td>
+										<td class="column100 column2" data-column="column2"><i class="fas fa-check fa-lg"></i></td> <!-- Google -->
+										<td class="column100 column3" data-column="column3"><i class="fas fa-check fa-lg"></i></td> <!-- Apple -->
+										<td class="column100 column4" data-column="column4"><i class="fas fa-check fa-lg"></i></td> <!-- Microsoft -->
+										<td class="column100 column5" data-column="column5"><i class="fas fa-check fa-lg"></i></td> <!-- Amazon -->
+										<td class="column100 column6" data-column="column6"><i class="fas fa-check fa-lg"></i></td> <!-- Facebook -->
+										<td class="column100 column7" data-column="column7"><i class="fas fa-check fa-lg"></i></td> <!-- Twitter -->
+										<td class="column100 column8" data-column="column8"><i class="fas fa-check fa-lg"></i></td> <!-- LinkedIn -->
+										<td class="column100 column9" data-column="column9"><i class="fas fa-check fa-lg"></i></td> <!-- Reddit -->
+										<td class="column100 column10" data-column="column10"><i class="fas fa-check fa-lg"></i></td> <!-- TikTok -->
+									</tr>
+
+									<tr class="row100">
+										<td class="column100 column1" data-column="column1">Timezone</td>
+										<td class="column100 column2" data-column="column2"></td> <!-- Google -->
+										<td class="column100 column3" data-column="column3"><i class="fas fa-check fa-lg"></i></td> <!-- Apple -->
+										<td class="column100 column4" data-column="column4"></td> <!-- Microsoft -->
+										<td class="column100 column5" data-column="column5"><i class="fas fa-check fa-lg"></i></td> <!-- Amazon -->
+										<td class="column100 column6" data-column="column6"><i class="fas fa-check fa-lg"></i></td> <!-- Facebook -->
+										<td class="column100 column7" data-column="column7"><i class="fas fa-check fa-lg"></i></td> <!-- Twitter -->
+										<td class="column100 column8" data-column="column8"></td> <!-- LinkedIn -->
+										<td class="column100 column9" data-column="column9"></td> <!-- Reddit -->
+										<td class="column100 column10" data-column="column10"><i class="fas fa-check fa-lg"></i></td> <!-- TikTok -->
+									</tr>
+
+									<tr class="row100">
+										<td class="column100 column1" data-column="column1">Language</td>
+										<td class="column100 column2" data-column="column2"><i class="fas fa-check fa-lg"></i></td> <!-- Google -->
+										<td class="column100 column3" data-column="column3"><i class="fas fa-check fa-lg"></i></td> <!-- Apple -->
+										<td class="column100 column4" data-column="column4"><i class="fas fa-check fa-lg"></i></td> <!-- Microsoft -->
+										<td class="column100 column5" data-column="column5"></td> <!-- Amazon -->
+										<td class="column100 column6" data-column="column6"><i class="fas fa-check fa-lg"></i></td> <!-- Facebook -->
+										<td class="column100 column7" data-column="column7"><i class="fas fa-check fa-lg"></i></td> <!-- Twitter -->
+										<td class="column100 column8" data-column="column8"><i class="fas fa-check fa-lg"></i></td> <!-- LinkedIn -->
+										<td class="column100 column9" data-column="column9"><i class="fas fa-check fa-lg"></i></td> <!-- Reddit -->
+										<td class="column100 column10" data-column="column10"><i class="fas fa-check fa-lg"></i></td> <!-- TikTok -->
+									</tr>
+
+									<tr class="row100">
+										<td class="column100 column1" data-column="column1">Work Experience</td>
+										<td class="column100 column2" data-column="column2"><i class="fas fa-check fa-lg"></i></td> <!-- Google -->
+										<td class="column100 column3" data-column="column3"><i class="fas fa-check fa-lg"></i></td> <!-- Apple -->
+										<td class="column100 column4" data-column="column4"></td> <!-- Microsoft -->
+										<td class="column100 column5" data-column="column5"></td> <!-- Amazon -->
+										<td class="column100 column6" data-column="column6"><i class="fas fa-check fa-lg"></i></td> <!-- Facebook -->
+										<td class="column100 column7" data-column="column7"></td> <!-- Twitter -->
+										<td class="column100 column8" data-column="column8"><i class="fas fa-check fa-lg"></i></td> <!-- LinkedIn -->
+										<td class="column100 column9" data-column="column9"></td> <!-- Reddit -->
+										<td class="column100 column10" data-column="column10"></td> <!-- TikTok -->
+									</tr>
+
+									<tr class="row100">
+										<td class="column100 column1" data-column="column1">Relationship Status</td>
+										<td class="column100 column2" data-column="column2"></td> <!-- Google -->
+										<td class="column100 column3" data-column="column3"></td> <!-- Apple -->
+										<td class="column100 column4" data-column="column4"></td> <!-- Microsoft -->
+										<td class="column100 column5" data-column="column5"><i class="fas fa-check fa-lg"></i></td> <!-- Amazon -->
+										<td class="column100 column6" data-column="column6"><i class="fas fa-check fa-lg"></i></td> <!-- Facebook -->
+										<td class="column100 column7" data-column="column7"></td> <!-- Twitter -->
+										<td class="column100 column8" data-column="column8"></td> <!-- LinkedIn -->
+										<td class="column100 column9" data-column="column9"></td> <!-- Reddit -->
+										<td class="column100 column10" data-column="column10"></td> <!-- TikTok -->
+									</tr>
+
+									<tr class="row100">
+										<td class="column100 column1" data-column="column1">Political & Religious Views</td>
+										<td class="column100 column2" data-column="column2"></td> <!-- Google -->
+										<td class="column100 column3" data-column="column3"></td> <!-- Apple -->
+										<td class="column100 column4" data-column="column4"></td> <!-- Microsoft -->
+										<td class="column100 column5" data-column="column5"></td> <!-- Amazon -->
+										<td class="column100 column6" data-column="column6"><i class="fas fa-check fa-lg"></i></td> <!-- Facebook -->
+										<td class="column100 column7" data-column="column7"></td> <!-- Twitter -->
+										<td class="column100 column8" data-column="column8"><i class="fas fa-check fa-lg"></i></td> <!-- LinkedIn -->
+										<td class="column100 column9" data-column="column9"></td> <!-- Reddit -->
+										<td class="column100 column10" data-column="column10"></td> <!-- TikTok -->
+									</tr>
+
+									<tr class="row100">
+										<td class="column100 column1" data-column="column1">Payment Information</td>
+										<td class="column100 column2" data-column="column2"><i class="fas fa-check fa-lg"></i></td> <!-- Google -->
+										<td class="column100 column3" data-column="column3"><i class="fas fa-check fa-lg"></i></td> <!-- Apple -->
+										<td class="column100 column4" data-column="column4"><i class="fas fa-check fa-lg"></i></td> <!-- Microsoft -->
+										<td class="column100 column5" data-column="column5"><i class="fas fa-check fa-lg"></i></td> <!-- Amazon -->
+										<td class="column100 column6" data-column="column6"><i class="fas fa-check fa-lg"></i></td> <!-- Facebook -->
+										<td class="column100 column7" data-column="column7"><i class="fas fa-check fa-lg"></i></td> <!-- Twitter -->
+										<td class="column100 column8" data-column="column8"><i class="fas fa-check fa-lg"></i></td> <!-- LinkedIn -->
+										<td class="column100 column9" data-column="column9"></td> <!-- Reddit -->
+										<td class="column100 column10" data-column="column10"><i class="fas fa-check fa-lg"></i></td> <!-- TikTok -->
+									</tr>
+
+									<tr class="row100">
+										<td class="column100 column1" data-column="column1">Credit Card Information</td>
+										<td class="column100 column2" data-column="column2"></td> <!-- Google -->
+										<td class="column100 column3" data-column="column3"></td> <!-- Apple -->
+										<td class="column100 column4" data-column="column4"><i class="fas fa-check fa-lg"></i></td> <!-- Microsoft -->
+										<td class="column100 column5" data-column="column5"><i class="fas fa-check fa-lg"></i></td> <!-- Amazon -->
+										<td class="column100 column6" data-column="column6"><i class="fas fa-check fa-lg"></i></td> <!-- Facebook -->
+										<td class="column100 column7" data-column="column7"><i class="fas fa-check fa-lg"></i></td> <!-- Twitter -->
+										<td class="column100 column8" data-column="column8"><i class="fas fa-check fa-lg"></i></td> <!-- LinkedIn -->
+										<td class="column100 column9" data-column="column9"></td> <!-- Reddit -->
+										<td class="column100 column10" data-column="column10"></td> <!-- TikTok -->
+									</tr>
+
+									<tr class="row100">
+										<td class="column100 column1" data-column="column1">Purchase History/Activity</td>
+										<td class="column100 column2" data-column="column2"><i class="fas fa-check fa-lg"></i></td> <!-- Google -->
+										<td class="column100 column3" data-column="column3"><i class="fas fa-check fa-lg"></i></td> <!-- Apple -->
+										<td class="column100 column4" data-column="column4"><i class="fas fa-check fa-lg"></i></td> <!-- Microsoft -->
+										<td class="column100 column5" data-column="column5"><i class="fas fa-check fa-lg"></i></td> <!-- Amazon -->
+										<td class="column100 column6" data-column="column6"><i class="fas fa-check fa-lg"></i></td> <!-- Facebook -->
+										<td class="column100 column7" data-column="column7"></td> <!-- Twitter -->
+										<td class="column100 column8" data-column="column8"></td> <!-- LinkedIn -->
+										<td class="column100 column9" data-column="column9"><i class="fas fa-check fa-lg"></i></td> <!-- Reddit -->
+										<td class="column100 column10" data-column="column10"><i class="fas fa-check fa-lg"></i></td> <!-- TikTok -->
+									</tr>
+
+									<tr class="row100">
+										<td class="column100 column1" data-column="column1">Contacts & their information</td>
+										<td class="column100 column2" data-column="column2"><i class="fas fa-check fa-lg"></i></td> <!-- Google -->
+										<td class="column100 column3" data-column="column3"><i class="fas fa-check fa-lg"></i></td> <!-- Apple -->
+										<td class="column100 column4" data-column="column4"><i class="fas fa-check fa-lg"></i></td> <!-- Microsoft -->
+										<td class="column100 column5" data-column="column5"><i class="fas fa-check fa-lg"></i></td> <!-- Amazon -->
+										<td class="column100 column6" data-column="column6"><i class="fas fa-check fa-lg"></i></td> <!-- Facebook -->
+										<td class="column100 column7" data-column="column7"><i class="fas fa-check fa-lg"></i></td> <!-- Twitter -->
+										<td class="column100 column8" data-column="column8"><i class="fas fa-check fa-lg"></i></td> <!-- LinkedIn -->
+										<td class="column100 column9" data-column="column9"></td> <!-- Reddit -->
+										<td class="column100 column10" data-column="column10"><i class="fas fa-check fa-lg"></i></td> <!-- TikTok -->
+									</tr>
+
+									<tr class="row100">
+										<td class="column100 column1" data-column="column1">Calendar Events</td>
+										<td class="column100 column2" data-column="column2"><i class="fas fa-check fa-lg"></i></td> <!-- Google -->
+										<td class="column100 column3" data-column="column3"><i class="fas fa-check fa-lg"></i></td> <!-- Apple -->
+										<td class="column100 column4" data-column="column4"><i class="fas fa-check fa-lg"></i></td> <!-- Microsoft -->
+										<td class="column100 column5" data-column="column5"></td> <!-- Amazon -->
+										<td class="column100 column6" data-column="column6"><i class="fas fa-check fa-lg"></i></td> <!-- Facebook -->
+										<td class="column100 column7" data-column="column7"></td> <!-- Twitter -->
+										<td class="column100 column8" data-column="column8"><i class="fas fa-check fa-lg"></i></td> <!-- LinkedIn -->
+										<td class="column100 column9" data-column="column9"></td> <!-- Reddit -->
+										<td class="column100 column10" data-column="column10"></td> <!-- TikTok -->
+									</tr>
+
+									<tr class="row100">
+										<td class="column100 column1" data-column="column1">Interests</td>
+										<td class="column100 column2" data-column="column2"></td> <!-- Google -->
+										<td class="column100 column3" data-column="column3"><i class="fas fa-check fa-lg"></i></td> <!-- Apple -->
+										<td class="column100 column4" data-column="column4"><i class="fas fa-check fa-lg"></i></td> <!-- Microsoft -->
+										<td class="column100 column5" data-column="column5"></td> <!-- Amazon -->
+										<td class="column100 column6" data-column="column6"><i class="fas fa-check fa-lg"></i></td> <!-- Facebook -->
+										<td class="column100 column7" data-column="column7"><i class="fas fa-check fa-lg"></i></td> <!-- Twitter -->
+										<td class="column100 column8" data-column="column8"></td> <!-- LinkedIn -->
+										<td class="column100 column9" data-column="column9"></td> <!-- Reddit -->
+										<td class="column100 column10" data-column="column10"></td> <!-- TikTok -->
+									</tr>
+
+									<tr class="row100">
+										<td class="column100 column1" data-column="column1">Likes and/or Follows</td>
+										<td class="column100 column2" data-column="column2"></td> <!-- Google -->
+										<td class="column100 column3" data-column="column3"></td> <!-- Apple -->
+										<td class="column100 column4" data-column="column4"><i class="fas fa-check fa-lg"></i></td> <!-- Microsoft -->
+										<td class="column100 column5" data-column="column5"></td> <!-- Amazon -->
+										<td class="column100 column6" data-column="column6"><i class="fas fa-check fa-lg"></i></td> <!-- Facebook -->
+										<td class="column100 column7" data-column="column7"><i class="fas fa-check fa-lg"></i></td> <!-- Twitter -->
+										<td class="column100 column8" data-column="column8"><i class="fas fa-check fa-lg"></i></td> <!-- LinkedIn -->
+										<td class="column100 column9" data-column="column9"><i class="fas fa-check fa-lg"></i></td> <!-- Reddit -->
+										<td class="column100 column10" data-column="column10"><i class="fas fa-check fa-lg"></i></td> <!-- TikTok -->
+									</tr>
+
+									<tr class="row100">
+										<td class="column100 column1" data-column="column1">Devices Used</td>
+										<td class="column100 column2" data-column="column2"><i class="fas fa-check fa-lg"></i></td> <!-- Google -->
+										<td class="column100 column3" data-column="column3"><i class="fas fa-check fa-lg"></i></td> <!-- Apple -->
+										<td class="column100 column4" data-column="column4"><i class="fas fa-check fa-lg"></i></td> <!-- Microsoft -->
+										<td class="column100 column5" data-column="column5"><i class="fas fa-check fa-lg"></i></td> <!-- Amazon -->
+										<td class="column100 column6" data-column="column6"><i class="fas fa-check fa-lg"></i></td> <!-- Facebook -->
+										<td class="column100 column7" data-column="column7"><i class="fas fa-check fa-lg"></i></td> <!-- Twitter -->
+										<td class="column100 column8" data-column="column8"><i class="fas fa-check fa-lg"></i></td> <!-- LinkedIn -->
+										<td class="column100 column9" data-column="column9"><i class="fas fa-check fa-lg"></i></td> <!-- Reddit -->
+										<td class="column100 column10" data-column="column10"><i class="fas fa-check fa-lg"></i></td> <!-- TikTok -->
+									</tr>
+
+									<tr class="row100">
+										<td class="column100 column1" data-column="column1">Mobile Carrier</td>
+										<td class="column100 column2" data-column="column2"><i class="fas fa-check fa-lg"></i></td> <!-- Google -->
+										<td class="column100 column3" data-column="column3"><i class="fas fa-check fa-lg"></i></td> <!-- Apple -->
+										<td class="column100 column4" data-column="column4"></td> <!-- Microsoft -->
+										<td class="column100 column5" data-column="column5"></td> <!-- Amazon -->
+										<td class="column100 column6" data-column="column6"><i class="fas fa-check fa-lg"></i></td> <!-- Facebook -->
+										<td class="column100 column7" data-column="column7"><i class="fas fa-check fa-lg"></i></td> <!-- Twitter -->
+										<td class="column100 column8" data-column="column8"><i class="fas fa-check fa-lg"></i></td> <!-- LinkedIn -->
+										<td class="column100 column9" data-column="column9"></td> <!-- Reddit -->
+										<td class="column100 column10" data-column="column10"><i class="fas fa-check fa-lg"></i></td> <!-- TikTok -->
+									</tr>
+
+									<tr class="row100">
+										<td class="column100 column1" data-column="column1">Browser Information</td>
+										<td class="column100 column2" data-column="column2"><i class="fas fa-check fa-lg"></i></td> <!-- Google -->
+										<td class="column100 column3" data-column="column3"><i class="fas fa-check fa-lg"></i></td> <!-- Apple -->
+										<td class="column100 column4" data-column="column4"><i class="fas fa-check fa-lg"></i></td> <!-- Microsoft -->
+										<td class="column100 column5" data-column="column5"><i class="fas fa-check fa-lg"></i></td> <!-- Amazon -->
+										<td class="column100 column6" data-column="column6"><i class="fas fa-check fa-lg"></i></td> <!-- Facebook -->
+										<td class="column100 column7" data-column="column7"><i class="fas fa-check fa-lg"></i></td> <!-- Twitter -->
+										<td class="column100 column8" data-column="column8"><i class="fas fa-check fa-lg"></i></td> <!-- LinkedIn -->
+										<td class="column100 column9" data-column="column9"><i class="fas fa-check fa-lg"></i></td> <!-- Reddit -->
+										<td class="column100 column10" data-column="column10"><i class="fas fa-check fa-lg"></i></td> <!-- TikTok -->
+									</tr>
+
+									<tr class="row100">
+										<td class="column100 column1" data-column="column1">Browsing History</td>
+										<td class="column100 column2" data-column="column2"><i class="fas fa-check fa-lg"></i></td> <!-- Google -->
+										<td class="column100 column3" data-column="column3"></td> <!-- Apple -->
+										<td class="column100 column4" data-column="column4"><i class="fas fa-check fa-lg"></i></td> <!-- Microsoft -->
+										<td class="column100 column5" data-column="column5"><i class="fas fa-check fa-lg"></i></td> <!-- Amazon -->
+										<td class="column100 column6" data-column="column6"><i class="fas fa-check fa-lg"></i></td> <!-- Facebook -->
+										<td class="column100 column7" data-column="column7"><i class="fas fa-check fa-lg"></i></td> <!-- Twitter -->
+										<td class="column100 column8" data-column="column8"></td> <!-- LinkedIn -->
+										<td class="column100 column9" data-column="column9"><i class="fas fa-check fa-lg"></i></td> <!-- Reddit -->
+										<td class="column100 column10" data-column="column10"><i class="fas fa-check fa-lg"></i></td> <!-- TikTok -->
+									</tr>
+
+									<tr class="row100">
+										<td class="column100 column1" data-column="column1">Search History</td>
+										<td class="column100 column2" data-column="column2"><i class="fas fa-check fa-lg"></i></td> <!-- Google -->
+										<td class="column100 column3" data-column="column3"></td> <!-- Apple -->
+										<td class="column100 column4" data-column="column4"><i class="fas fa-check fa-lg"></i></td> <!-- Microsoft -->
+										<td class="column100 column5" data-column="column5"><i class="fas fa-check fa-lg"></i></td> <!-- Amazon -->
+										<td class="column100 column6" data-column="column6"><i class="fas fa-check fa-lg"></i></td> <!-- Facebook -->
+										<td class="column100 column7" data-column="column7"><i class="fas fa-check fa-lg"></i></td> <!-- Twitter -->
+										<td class="column100 column8" data-column="column8"><i class="fas fa-check fa-lg"></i></td> <!-- LinkedIn -->
+										<td class="column100 column9" data-column="column9"><i class="fas fa-check fa-lg"></i></td> <!-- Reddit -->
+										<td class="column100 column10" data-column="column10"><i class="fas fa-check fa-lg"></i></td> <!-- TikTok -->
+									</tr>
+
+									<tr class="row100">
+										<td class="column100 column1" data-column="column1">Internet Service Provider</td>
+										<td class="column100 column2" data-column="column2"></td> <!-- Google -->
+										<td class="column100 column3" data-column="column3"><i class="fas fa-check fa-lg"></i></td> <!-- Apple -->
+										<td class="column100 column4" data-column="column4"></td> <!-- Microsoft -->
+										<td class="column100 column5" data-column="column5"><i class="fas fa-check fa-lg"></i></td> <!-- Amazon -->
+										<td class="column100 column6" data-column="column6"><i class="fas fa-check fa-lg"></i></td> <!-- Facebook -->
+										<td class="column100 column7" data-column="column7"></td> <!-- Twitter -->
+										<td class="column100 column8" data-column="column8"><i class="fas fa-check fa-lg"></i></td> <!-- LinkedIn -->
+										<td class="column100 column9" data-column="column9"></td> <!-- Reddit -->
+										<td class="column100 column10" data-column="column10"></td> <!-- TikTok -->
+									</tr>
+
+									<tr class="row100">
+										<td class="column100 column1" data-column="column1">IP Address</td>
+										<td class="column100 column2" data-column="column2"><i class="fas fa-check fa-lg"></i></td> <!-- Google -->
+										<td class="column100 column3" data-column="column3"><i class="fas fa-check fa-lg"></i></td> <!-- Apple -->
+										<td class="column100 column4" data-column="column4"><i class="fas fa-check fa-lg"></i></td> <!-- Microsoft -->
+										<td class="column100 column5" data-column="column5"><i class="fas fa-check fa-lg"></i></td> <!-- Amazon -->
+										<td class="column100 column6" data-column="column6"><i class="fas fa-check fa-lg"></i></td> <!-- Facebook -->
+										<td class="column100 column7" data-column="column7"><i class="fas fa-check fa-lg"></i></td> <!-- Twitter -->
+										<td class="column100 column8" data-column="column8"><i class="fas fa-check fa-lg"></i></td> <!-- LinkedIn -->
+										<td class="column100 column9" data-column="column9"><i class="fas fa-check fa-lg"></i></td> <!-- Reddit -->
+										<td class="column100 column10" data-column="column10"><i class="fas fa-check fa-lg"></i></td> <!-- TikTok -->
+									</tr>
+
+									<tr class="row100">
+										<td class="column100 column1" data-column="column1">Operating System</td>
+										<td class="column100 column2" data-column="column2"><i class="fas fa-check fa-lg"></i></td> <!-- Google -->
+										<td class="column100 column3" data-column="column3"><i class="fas fa-check fa-lg"></i></td> <!-- Apple -->
+										<td class="column100 column4" data-column="column4"></td> <!-- Microsoft -->
+										<td class="column100 column5" data-column="column5"></td> <!-- Amazon -->
+										<td class="column100 column6" data-column="column6"><i class="fas fa-check fa-lg"></i></td> <!-- Facebook -->
+										<td class="column100 column7" data-column="column7"><i class="fas fa-check fa-lg"></i></td> <!-- Twitter -->
+										<td class="column100 column8" data-column="column8"><i class="fas fa-check fa-lg"></i></td> <!-- LinkedIn -->
+										<td class="column100 column9" data-column="column9"><i class="fas fa-check fa-lg"></i></td> <!-- Reddit -->
+										<td class="column100 column10" data-column="column10"><i class="fas fa-check fa-lg"></i></td> <!-- TikTok -->
+									</tr>
+
+									<tr class="row100">
+										<td class="column100 column1" data-column="column1">Ads clicked/viewed/interacted</td>
+										<td class="column100 column2" data-column="column2"><i class="fas fa-check fa-lg"></i></td> <!-- Google -->
+										<td class="column100 column3" data-column="column3"><i class="fas fa-check fa-lg"></i></td> <!-- Apple -->
+										<td class="column100 column4" data-column="column4"><i class="fas fa-check fa-lg"></i></td> <!-- Microsoft -->
+										<td class="column100 column5" data-column="column5"><i class="fas fa-check fa-lg"></i></td> <!-- Amazon -->
+										<td class="column100 column6" data-column="column6"><i class="fas fa-check fa-lg"></i></td> <!-- Facebook -->
+										<td class="column100 column7" data-column="column7"><i class="fas fa-check fa-lg"></i></td> <!-- Twitter -->
+										<td class="column100 column8" data-column="column8"><i class="fas fa-check fa-lg"></i></td> <!-- LinkedIn -->
+										<td class="column100 column9" data-column="column9"><i class="fas fa-check fa-lg"></i></td> <!-- Reddit -->
+										<td class="column100 column10" data-column="column10"><i class="fas fa-check fa-lg"></i></td> <!-- TikTok -->
+									</tr>
+
+									<tr class="row100">
+										<td class="column100 column1" data-column="column1">Apps installed</td>
+										<td class="column100 column2" data-column="column2"><i class="fas fa-check fa-lg"></i></td> <!-- Google -->
+										<td class="column100 column3" data-column="column3"><i class="fas fa-check fa-lg"></i></td> <!-- Apple -->
+										<td class="column100 column4" data-column="column4"><i class="fas fa-check fa-lg"></i></td> <!-- Microsoft -->
+										<td class="column100 column5" data-column="column5"><i class="fas fa-check fa-lg"></i></td> <!-- Amazon -->
+										<td class="column100 column6" data-column="column6"><i class="fas fa-check fa-lg"></i></td> <!-- Facebook -->
+										<td class="column100 column7" data-column="column7"><i class="fas fa-check fa-lg"></i></td> <!-- Twitter -->
+										<td class="column100 column8" data-column="column8"><i class="fas fa-check fa-lg"></i></td> <!-- LinkedIn -->
+										<td class="column100 column9" data-column="column9"></td> <!-- Reddit -->
+										<td class="column100 column10" data-column="column10"><i class="fas fa-check fa-lg"></i></td> <!-- TikTok -->
+									</tr>
+
+									<tr class="row100">
+										<td class="column100 column1" data-column="column1">Content viewed or engaged with</td>
+										<td class="column100 column2" data-column="column2"><i class="fas fa-check fa-lg"></i></td> <!-- Google -->
+										<td class="column100 column3" data-column="column3"></td> <!-- Apple -->
+										<td class="column100 column4" data-column="column4"><i class="fas fa-check fa-lg"></i></td> <!-- Microsoft -->
+										<td class="column100 column5" data-column="column5"><i class="fas fa-check fa-lg"></i></td> <!-- Amazon -->
+										<td class="column100 column6" data-column="column6"><i class="fas fa-check fa-lg"></i></td> <!-- Facebook -->
+										<td class="column100 column7" data-column="column7"><i class="fas fa-check fa-lg"></i></td> <!-- Twitter -->
+										<td class="column100 column8" data-column="column8"><i class="fas fa-check fa-lg"></i></td> <!-- LinkedIn -->
+										<td class="column100 column9" data-column="column9"><i class="fas fa-check fa-lg"></i></td> <!-- Reddit -->
+										<td class="column100 column10" data-column="column10"><i class="fas fa-check fa-lg"></i></td> <!-- TikTok -->
+									</tr>
+
+									<tr class="row100">
+										<td class="column100 column1" data-column="column1">Facial Recognition Data</td>
+										<td class="column100 column2" data-column="column2"></td> <!-- Google -->
+										<td class="column100 column3" data-column="column3"></td> <!-- Apple -->
+										<td class="column100 column4" data-column="column4"><i class="fas fa-check fa-lg"></i></td> <!-- Microsoft -->
+										<td class="column100 column5" data-column="column5"><i class="fas fa-check fa-lg"></i></td> <!-- Amazon -->
+										<td class="column100 column6" data-column="column6"><i class="fas fa-check fa-lg"></i></td> <!-- Facebook -->
+										<td class="column100 column7" data-column="column7"></td> <!-- Twitter -->
+										<td class="column100 column8" data-column="column8"></td> <!-- LinkedIn -->
+										<td class="column100 column9" data-column="column9"></td> <!-- Reddit -->
+										<td class="column100 column10" data-column="column10"><i class="fas fa-check fa-lg"></i></td> <!-- TikTok -->
+									</tr>
+
+									<tr class="row100">
+										<td class="column100 column1" data-column="column1">Keystroke Patterns / Mouse Movements</td>
+										<td class="column100 column2" data-column="column2"></td> <!-- Google -->
+										<td class="column100 column3" data-column="column3"></td> <!-- Apple -->
+										<td class="column100 column4" data-column="column4"></td> <!-- Microsoft -->
+										<td class="column100 column5" data-column="column5"><i class="fas fa-check fa-lg"></i></td> <!-- Amazon -->
+										<td class="column100 column6" data-column="column6"><i class="fas fa-check fa-lg"></i></td> <!-- Facebook -->
+										<td class="column100 column7" data-column="column7"></td> <!-- Twitter -->
+										<td class="column100 column8" data-column="column8"></td> <!-- LinkedIn -->
+										<td class="column100 column9" data-column="column9"></td> <!-- Reddit -->
+										<td class="column100 column10" data-column="column10"><i class="fas fa-check fa-lg"></i></td> <!-- TikTok -->
+									</tr>
+
+									<tr class="row100">
+										<td class="column100 column1" data-column="column1">Dates & Time of use</td>
+										<td class="column100 column2" data-column="column2"><i class="fas fa-check fa-lg"></i></td> <!-- Google -->
+										<td class="column100 column3" data-column="column3"><i class="fas fa-check fa-lg"></i></td> <!-- Apple -->
+										<td class="column100 column4" data-column="column4"><i class="fas fa-check fa-lg"></i></td> <!-- Microsoft -->
+										<td class="column100 column5" data-column="column5"><i class="fas fa-check fa-lg"></i></td> <!-- Amazon -->
+										<td class="column100 column6" data-column="column6"><i class="fas fa-check fa-lg"></i></td> <!-- Facebook -->
+										<td class="column100 column7" data-column="column7"><i class="fas fa-check fa-lg"></i></td> <!-- Twitter -->
+										<td class="column100 column8" data-column="column8"><i class="fas fa-check fa-lg"></i></td> <!-- LinkedIn -->
+										<td class="column100 column9" data-column="column9"><i class="fas fa-check fa-lg"></i></td> <!-- Reddit -->
+										<td class="column100 column10" data-column="column10"><i class="fas fa-check fa-lg"></i></td> <!-- TikTok -->
+									</tr>
+
+									<tr class="row100">
+										<td class="column100 column1" data-column="column1">Usage Data</td>
+										<td class="column100 column2" data-column="column2"></td> <!-- Google -->
+										<td class="column100 column3" data-column="column3"></td> <!-- Apple -->
+										<td class="column100 column4" data-column="column4"><i class="fas fa-check fa-lg"></i></td> <!-- Microsoft -->
+										<td class="column100 column5" data-column="column5"><i class="fas fa-check fa-lg"></i></td> <!-- Amazon -->
+										<td class="column100 column6" data-column="column6"><i class="fas fa-check fa-lg"></i></td> <!-- Facebook -->
+										<td class="column100 column7" data-column="column7"><i class="fas fa-check fa-lg"></i></td> <!-- Twitter -->
+										<td class="column100 column8" data-column="column8"><i class="fas fa-check fa-lg"></i></td> <!-- LinkedIn -->
+										<td class="column100 column9" data-column="column9"><i class="fas fa-check fa-lg"></i></td> <!-- Reddit -->
+										<td class="column100 column10" data-column="column10"><i class="fas fa-check fa-lg"></i></td> <!-- TikTok -->
+									</tr>
+
+									<tr class="row100">
+										<td class="column100 column1" data-column="column1">Phone Calls</td>
+										<td class="column100 column2" data-column="column2"><i class="fas fa-check fa-lg"></i></td> <!-- Google -->
+										<td class="column100 column3" data-column="column3"></td> <!-- Apple -->
+										<td class="column100 column4" data-column="column4"><i class="fas fa-check fa-lg"></i></td> <!-- Microsoft -->
+										<td class="column100 column5" data-column="column5"></td> <!-- Amazon -->
+										<td class="column100 column6" data-column="column6"><i class="fas fa-check fa-lg"></i></td> <!-- Facebook -->
+										<td class="column100 column7" data-column="column7"></td> <!-- Twitter -->
+										<td class="column100 column8" data-column="column8"></td> <!-- LinkedIn -->
+										<td class="column100 column9" data-column="column9"></td> <!-- Reddit -->
+										<td class="column100 column10" data-column="column10"></td> <!-- TikTok -->
+									</tr>
+
+									<tr class="row100">
+										<td class="column100 column1" data-column="column1">Emails written & received</td>
+										<td class="column100 column2" data-column="column2"><i class="fas fa-check fa-lg"></i></td> <!-- Google -->
+										<td class="column100 column3" data-column="column3"></td> <!-- Apple -->
+										<td class="column100 column4" data-column="column4"><i class="fas fa-check fa-lg"></i></td> <!-- Microsoft -->
+										<td class="column100 column5" data-column="column5"><i class="fas fa-check fa-lg"></i></td> <!-- Amazon -->
+										<td class="column100 column6" data-column="column6"></td> <!-- Facebook -->
+										<td class="column100 column7" data-column="column7"><i class="fas fa-check fa-lg"></i></td> <!-- Twitter -->
+										<td class="column100 column8" data-column="column8"></td> <!-- LinkedIn -->
+										<td class="column100 column9" data-column="column9"></td> <!-- Reddit -->
+										<td class="column100 column10" data-column="column10"></td> <!-- TikTok -->
+									</tr>
+
+									<tr class="row100">
+										<td class="column100 column1" data-column="column1">Chats & Messages</td>
+										<td class="column100 column2" data-column="column2"><i class="fas fa-check fa-lg"></i></td> <!-- Google -->
+										<td class="column100 column3" data-column="column3"></td> <!-- Apple -->
+										<td class="column100 column4" data-column="column4"><i class="fas fa-check fa-lg"></i></td> <!-- Microsoft -->
+										<td class="column100 column5" data-column="column5"></td> <!-- Amazon -->
+										<td class="column100 column6" data-column="column6"><i class="fas fa-check fa-lg"></i></td> <!-- Facebook -->
+										<td class="column100 column7" data-column="column7"><i class="fas fa-check fa-lg"></i></td> <!-- Twitter -->
+										<td class="column100 column8" data-column="column8"><i class="fas fa-check fa-lg"></i></td> <!-- LinkedIn -->
+										<td class="column100 column9" data-column="column9"><i class="fas fa-check fa-lg"></i></td> <!-- Reddit -->
+										<td class="column100 column10" data-column="column10"><i class="fas fa-check fa-lg"></i></td> <!-- TikTok -->
+									</tr>
+
+								</tbody>
+							</table>
+						</div>
+					</div>
+				<!-- </div> -->
+			</div>
+
+			<!--Cards for summarizing privacy policy documents-->
+						<div class="app">
+							<div class="full hide-scroll">
+							    <ul class="hs">
+								      <div class ="item">
+								      	<form action="http://localhost:5000/uploader" method="POST" enctype="multipart/form-data">
+								      	<label id = "upload">
+								      		Upload file
+								      		<input type = "file" name = "file" size = "1" style = "opacity:0; top:0; bottom:0; left:0; right:0; width:100%; height:100%; position: absolute;" onchange="this.form.submit();">
+								      		</input>
+								      	</label>
+								      	<!-- <input type = "submit"/> -->
+								      	</form>
+								      </div>
+							      <div class="item">test</div>
+							      <div class="item">test</div>
+							      <div class="item">test</div>
+							      <div class="item">test</div>
+							      <div class="item">test</div>
+							    </ul>
+							</div>
+						</div>
 					</div>
 				</section>
+				
 
 			<!-- Highlights -->
 				<section id="profiling" class="wrapper style3">
@@ -288,19 +872,77 @@
 
 			<!-- Intro -->
 				<section id="team" class="wrapper style1">
-					<div class="title">The Team</div>
+					<div class="title">Meet Our Team</div>
 					<div class="container">
-						<p class="style1">Meet our team</p>
-						<p class="style2">
-							Escape Velocity is a free responsive<br class="mobile-hide" />
-							site template by <a href="http://html5up.net" class="nobr">HTML5 UP</a>
-						</p>
-						<p class="style3">It's <strong>responsive</strong>, built on <strong>HTML5</strong> and <strong>CSS3</strong>, and released for
-						free under the <a href="http://html5up.net/license">Creative Commons Attribution 3.0 license</a>, so use it for any of
-						your personal or commercial projects &ndash; just be sure to credit us!</p>
-						<ul class="actions">
-							<li><a href="#" class="button style3 large">Proceed</a></li>
-						</ul>
+						<div class="row aln-center">
+							<div class="col-4 col-12-medium">
+								<section class="highlight">
+									<center><a href="#" class="image featured"><img id ="author" src="../static/images/shashi.jpg" alt="" /></a></center>
+									<center><h3><a href="#">Shashikant Kumar</a></h3></center>
+								</section>
+							</div>
+							<div class="col-4 col-12-medium">
+								<section class="highlight">
+									<center><a href="#" class="image featured"><img id ="author" src="../static/images/pp.jpg" alt="" /></a></center>
+									<center><h3><a href="#">Shaunak Pal</a></h3></center>
+									
+								</section>
+							</div>
+							<div class="col-4 col-12-medium">
+								<section class="highlight">
+									<center><a href="#" class="image featured"><img id ="author" src="../static/images/angit.jpg" alt="" /></a></center>
+									<center><h3><a href="#">Ankit Mishra</a></h3></center>
+									
+								</section>
+							</div>
+								<div class="col-4 col-12-medium">
+								<section class="highlight">
+									<center><a href="#" class="image featured"><img id ="author" src="../static/images/mono.jpg" alt="" /></a></center>
+									<center><h3><a href="#">Mohnish Agrawal</a></h3></center>
+								</section>
+							</div>
+							<div class="col-4 col-12-medium">
+								<section class="highlight">
+									<center><a href="#" class="image featured"><img  id ="author" src="../static/images/rajat.jpeg" alt="" /></a>
+									<h3><a href="#">Rajat Prakash</a></h3></center>
+									
+								</section>
+							</div>
+							<div class="col-4 col-12-medium">
+								<section class="highlight">
+									<center><a href="#" class="image featured"><img  id ="author" src="../static/images/prince.jpg" alt="" /></a>
+									<h3><a href="#">Prince</a></h3></center>
+									
+								</section>
+							</div>
+								<div class="col-4 col-12-medium">
+								<section class="highlight">
+									<center><a href="#" class="image featured"><img id ="author"  src="../static/images/sitaram.jpg" alt="" /></a>
+									<h3><a href="#">Sitaram</a></h3></center>
+								</section>
+							</div>
+							<div class="col-4 col-12-medium">
+								<section class="highlight">
+									<center><a href="#" class="image featured"><img  id ="author" src="../static/images/abhinav.jpg" alt="" /></a>
+									<h3><a href="#">Abhinav SE</a></h3></center>
+									
+								</section>
+							</div>
+							<div class="col-4 col-12-medium">
+								<section class="highlight">
+									<center><a href="#" class="image featured"><img id ="author" src="../static/images/ridim.jpg" alt="" /></a>
+									<h3><a href="#">Rhythm Patel</a></h3></center>
+									
+								</section>
+							</div>
+							<div class="col-4 col-12-medium">
+								<section class="highlight">
+									<center><a href="#" class="image featured"><img id ="author" src="../static/images/atish.jpg" alt="" /></a>
+									<h3><a href="#">Atish Sahi</a></h3></center>
+									
+								</section>
+							</div>
+						</div>
 					</div>
 				</section>
 
@@ -323,6 +965,11 @@
 			<script src="{{url_for('static', filename = 'assets/js/breakpoints.min.js')}}"></script>
 			<script src="{{url_for('static', filename = 'assets/js/util.js')}}"></script>
 			<script src="{{url_for('static', filename = 'assets/js/main.js')}}"></script>
+			<script src="{{url_for('static', filename = 'assets/vendor/jquery/jquery-3.2.1.min.js')}}"></script>
+			<script src="{{url_for('static', filename = 'assets/vendor/bootstrap/js/popper.js')}}"></script>
+			<script src="{{url_for('static', filename = 'assets/vendor/bootstrap/js/bootstrap.min.js')}}"></script>
+			<script src="{{url_for('static', filename = 'assets/vendor/select2/select2.min.js')}}"></script>
+			<script src="{{url_for('static', filename = 'assets/js/table_main.js')}}"></script>
 			<!-- <script src="{{url_for('static', filename = 'assets/js/drag.js')}}"></script> -->
 
 	</body>

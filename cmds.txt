@@ -1,0 +1,25 @@
+#query 1
+pullreq.filter(pullreq['event'] == 'opened').select(to_date('timestamp').alias('date')).groupBy('date').count().sort('date').show(10)
+pullreq.filter(pullreq['event'] == 'discussed').select(to_date('timestamp').alias('date')).groupBy('date').count().sort('date').show(10)
+
+#query 2
+t1 = pullreq.filter(pullreq['event'] =='discussed').groupBy(month('timestamp').alias('month'), 'author').agg(count('event').alias('frequency')).select('author', 'frequency', 'month')
+t2 = t1.groupBy('month').agg(max('frequency').alias('frequency')).select('frequency', 'month')
+t1.join(t2, ['month', 'frequency']).select('author', 'frequency', 'month').sort('month').show()
+
+#query 3
+t1 = pullreq.withColumn('temp', lit('2010-09-06')).filter(pullreq['event'] =='discussed').groupBy((expr("date_sub(timestamp, datediff(timestamp, temp)%7)")).alias('week'), 'author').agg(count('event').alias('frequency')).select('author', 'frequency', 'week')
+t2 = t1.groupBy('week').agg(max('frequency').alias('frequency')).select('frequency', 'week')
+t1.join(t2, ['week', 'frequency']).select('author', 'frequency', 'week').sort('week').show()
+
+#query 4
+pullreq.withColumn('temp', lit('2010-09-06')).filter(pullreq['event'] == 'opened').groupBy((expr("date_sub(timestamp, datediff(timestamp, temp)%7)")).alias("week")).agg(count('event').alias('frequency')).select('week', 'frequency').sort('week').show()
+
+#query 5
+pullreq.filter((year('timestamp') == lit('2010')) & (pullreq['event'] == 'merged')).groupBy(month('timestamp').alias('month')).agg(count('event').alias('frequency')).select('month','frequency').sort('month').show()
+
+#query 6
+pullreq.groupBy(to_date('timestamp').alias('date')).agg(count('event').alias('frequency')).select('date','frequency').sort('date').show()
+
+#query 7 
+pullreq.filter((year(pullreq['timestamp']) == '2011') & (pullreq['event'] == 'opened')).groupBy('author').agg(count('pull_requestid').alias('PRs')).select('author','PRs').sort(desc('PRs')).show(1)
