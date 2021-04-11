@@ -23,12 +23,15 @@ class QNA:
         init(policy_path)
 
     def get_answer(self, question: str) -> List[str]:
-        answer = getResults([question], 1)[0]
-        summary = self.ps.summarize(answer[0], 3)
+        answers = getResults([question], 5)[0]
+        answer = ''
+        for ans in answers:
+            answer += ans + ' '
+        summary = self.ps.summarize(answer, 3)
         return summary
 
 
 if __name__ == '__main__':
-    qna = QNA('whatsapp.txt')
-    question = 'Does whatsapp collect history data?'
+    qna = QNA('./whatsapp.txt')
+    question = 'how Is my data information (user history, location history, cookies, etc) collected/stored by this app?'
     print(qna.get_answer(question))
