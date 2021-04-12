@@ -1,0 +1,5 @@
+flask
+spacy
+sumy
+sentence-transformers
+bm25
