@@ -1,7 +1,6 @@
-from newspaper import Article
 import nltk
 import pandas as pd
-from tqdm import tqdm
+# from tqdm import tqdm
 import numpy as np
 import pickle as pkl
 import re
@@ -18,10 +17,13 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
 from sklearn.utils import shuffle
 wordnet_lemmatizer = WordNetLemmatizer()
+import random
+
 
 class TopicVectorizer:
 
     def __init__(self, model, label_encoder, tfid):
+        random.seed(42)
         self.model = model
         self.label_encoder = label_encoder
         self.tfid = tfid
@@ -40,14 +42,14 @@ class TopicVectorizer:
     def lemmatize_stemming(self, text):
         return ' '.join([WordNetLemmatizer().lemmatize(word, pos='v') for word in text])
 
-    def urls_to_text(self, urls):
-        texts = []
-        for url in tqdm(urls, total=len(urls)):
-            article = Article(url)
-            article.download()
-            article.parse()
-            texts.append(article.text)
-        return ' '.join(texts)
+    # def urls_to_text(self, urls):
+    #     texts = []
+    #     for url in tqdm(urls, total=len(urls)):
+    #         article = Article(url)
+    #         article.download()
+    #         article.parse()
+    #         texts.append(article.text)
+    #     return ' '.join(texts)
 
     def id_to_labels(self, ids):
         return self.label_encoder.inverse_transform(ids)
@@ -61,8 +63,16 @@ class TopicVectorizer:
         result = self.transform_urls(series)
         labels = self.id_to_labels(range(len(result[0])))
         result_list = list()
+        color_dict = {20:"#A8E6CE", 40:"#DCEDC2", 60:"#FFD3B5", 80:"#FFAA6", 100: "#FF8C94"}
         for i in range(len(labels)):
-            result_list.append([labels[i],result[0,i]])
+            percentage = result[0,i]/max(result[0])*100
+            color = ""
+            radius = 100
+            for k in color_dict: 
+                if k - percentage >= 0 and k - percentage <= 20:
+                    color = color_dict[k]
+                    break
+            result_list.append([labels[i],result[0,i], int(percentage),color])
         return result_list
         
 

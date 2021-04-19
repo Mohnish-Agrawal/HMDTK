@@ -53,7 +53,7 @@ def profiler():
 
 	with open('static/data.csv', 'w', encoding = "utf-8", newline = "") as f:
 		write = csv.writer(f)
-		write.writerow(["Field", "Value"])
+		write.writerow(["Field", "Value", "Radius","Color"])
 		write.writerows(data)
 
 	return render_template('test.html')

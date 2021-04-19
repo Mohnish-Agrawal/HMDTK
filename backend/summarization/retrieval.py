@@ -9,8 +9,8 @@ from collections import defaultdict
 from sklearn.feature_extraction.text import TfidfVectorizer
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
-from sentence_transformers import SentenceTransformer, util
-from sentence_transformers.cross_encoder import CrossEncoder
+# from sentence_transformers import SentenceTransformer, util
+# from sentence_transformers.cross_encoder import CrossEncoder
 from gensim.summarization.bm25 import BM25
 
 class bm25:
@@ -87,18 +87,18 @@ class tfidf:
 		queryVector = self.tfidf_model.transform([query])
 		return np.transpose(cosine_similarity(self.documents, queryVector))
 
-class sbert:
+# class sbert:
 
-	def __init__(self):
-		self.model = SentenceTransformer('msmarco-distilroberta-base-v2')
-		self.document = None
+# 	def __init__(self):
+# 		self.model = SentenceTransformer('msmarco-distilroberta-base-v2')
+# 		self.document = None
 
-	def fit(self, docs):
-		self.document = self.model.encode(docs)
+# 	def fit(self, docs):
+# 		self.document = self.model.encode(docs)
 	
-	def rankDocuments(self, query):
-		query_encoded = self.model.encode(query)
-		return util.pytorch_cos_sim(query_encoded, self.document).numpy()
+# 	def rankDocuments(self, query):
+# 		query_encoded = self.model.encode(query)
+# 		return util.pytorch_cos_sim(query_encoded, self.document).numpy()
 
 class rerankPassages:
 
@@ -109,7 +109,7 @@ class rerankPassages:
 		self.bm25_ranking = bm25(nlp)
 		# self.sbert_ranking = sbert()
 
-		self.cross_encoder = CrossEncoder("cross-encoder/ms-marco-TinyBERT-L-6")
+		# self.cross_encoder = CrossEncoder("cross-encoder/ms-marco-TinyBERT-L-6")
 		self.document = None
 	
 	def fit(self, document):
@@ -134,36 +134,36 @@ class rerankPassages:
 	def getSentences(self, query, n):
 		return self.kg.retrieveSentences(query, n)
 
-	def withKg(self, query, paras, t):
-			sentences = self.kg.retrieveSentences(query, 10)
+	# def withKg(self, query, paras, t):
+	# 		sentences = self.kg.retrieveSentences(query, 10)
 
-			for i in paras:
-				avgScore = 0
-				sentencesMatched = 0
-				for s in sentences:
-					sentence = s['sentence']
-					score = s['score']
-					if self.matchParaSent(sentence, i[0]):
-						if sentence not in i[0]: print(sentence, i[0])
-						# print(sentence, i[0])
-						sentencesMatched += 1
-						avgScore += score
-				# if sentencesMatched == 0: sentencesMatched = 1
-				i[1] = 1/(t + i[1]) + 1/(t + sentencesMatched)
+	# 		for i in paras:
+	# 			avgScore = 0
+	# 			sentencesMatched = 0
+	# 			for s in sentences:
+	# 				sentence = s['sentence']
+	# 				score = s['score']
+	# 				if self.matchParaSent(sentence, i[0]):
+	# 					if sentence not in i[0]: print(sentence, i[0])
+	# 					# print(sentence, i[0])
+	# 					sentencesMatched += 1
+	# 					avgScore += score
+	# 			# if sentencesMatched == 0: sentencesMatched = 1
+	# 			i[1] = 1/(t + i[1]) + 1/(t + sentencesMatched)
 
-			paras.sort(key = lambda x : x[1])
-			return [i[0] for i in paras]
+	# 		paras.sort(key = lambda x : x[1])
+	# 		return [i[0] for i in paras]
 
-	def withCrossEncoder(self, query, paras):
-		para_combination = [[query, p] for p in paras]
+	# def withCrossEncoder(self, query, paras):
+	# 	para_combination = [[query, p] for p in paras]
 
-		score = self.cross_encoder.predict(para_combination)
-		sim_scores_argsort = reversed(np.argsort(score))
+	# 	score = self.cross_encoder.predict(para_combination)
+	# 	sim_scores_argsort = reversed(np.argsort(score))
 		
-		reranked_passages = list()
-		for idx in sim_scores_argsort:
-			reranked_passages.append(paras[idx])
-		return reranked_passages
+	# 	reranked_passages = list()
+	# 	for idx in sim_scores_argsort:
+	# 		reranked_passages.append(paras[idx])
+	# 	return reranked_passages
 
 	def rankDocuments(self, query, mu):
 		bm25_scores = self.bm25_ranking.rankDocuments(query)
@@ -181,6 +181,6 @@ class rerankPassages:
 		score_passage = [(s,i) for i, s in enumerate(scores[0])]
 		score_passage.sort(reverse = True)
 		# return self.withKg(query, [[self.document[i[1]], i[0]] for i in score_passage[:4]], k)
-		return self.withCrossEncoder(query, [self.document[i[1]] for i in score_passage[:5]])
+		# return self.withCrossEncoder(query, [self.document[i[1]] for i in score_passage[:5]])
 
-		# return [self.document[i[1]] for i in score_passage[:4]]
+		return [self.document[i[1]] for i in score_passage[:4]]

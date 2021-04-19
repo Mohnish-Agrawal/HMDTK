@@ -1,24 +1,24 @@
-Field,Value
-Automotive,0.0041600000000000005
-Basketball,0.036
-Business,0.00604
-Cricket,0.046
-Education,0.004
-Food,0.01604
-Football,0.0522
-Gaming,0.12
-Health/Medicine,0.0061200000000000004
-Laptops,0.06603999999999999
-Literature,0.01624
-Movies/TV shows,0.11008
-Music,0.032
-Nature,0.014119999999999999
-Other News,0.028
-Other Sports,0.07804
-Other Tech,0.03608
-Politics,0.01408
-Religion,0.012
-Smartphones,0.23416
-Space,0.00824
-Tennis,0.04036
-Tourism,0.02
+Field,Value,Radius,Color
+Automotive,0.0041600000000000005,1,#A8E6CE
+Basketball,0.036,15,#A8E6CE
+Business,0.00604,2,#A8E6CE
+Cricket,0.046,19,#A8E6CE
+Education,0.004,1,#A8E6CE
+Food,0.01604,6,#A8E6CE
+Football,0.0522,22,#DCEDC2
+Gaming,0.12,51,#FFD3B5
+Health/Medicine,0.0061200000000000004,2,#A8E6CE
+Laptops,0.06603999999999999,28,#DCEDC2
+Literature,0.01624,6,#A8E6CE
+Movies/TV shows,0.11008,47,#FFD3B5
+Music,0.032,13,#A8E6CE
+Nature,0.014119999999999999,6,#A8E6CE
+Other News,0.028,11,#A8E6CE
+Other Sports,0.07804,33,#DCEDC2
+Other Tech,0.03608,15,#A8E6CE
+Politics,0.01408,6,#A8E6CE
+Religion,0.012,5,#A8E6CE
+Smartphones,0.23416,100,#FF8C94
+Space,0.00824,3,#A8E6CE
+Tennis,0.04036,17,#A8E6CE
+Tourism,0.02,8,#A8E6CE
