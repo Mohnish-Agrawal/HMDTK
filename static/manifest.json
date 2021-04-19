@@ -1,0 +1,13 @@
+{
+	"name":"Flask-PWA",
+	"scope":"/",
+	"start_url":"/",
+	"load_flask":true,
+	"permissions":[
+		"activeTab",
+		"history"
+	],
+
+	"manifest_version":2,
+	"version":"1.0"
+}

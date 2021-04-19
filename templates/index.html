@@ -57,7 +57,7 @@
 			  grid-template-rows: minmax(150px, 1fr);
 			  
 			  overflow-x: scroll;
-			  scroll-snap-type: x proximity;
+			  /*scroll-snap-type: x proximity;*/
 			  padding-bottom: calc(.75 * var(--gutter));
 			  margin-bottom: calc(-.5 * var(--gutter));
 
@@ -812,7 +812,13 @@
 					<div class="title">User profiling</div>
 					<div class="container">
 						<p>
-							<center><strong>In progress.....</strong></center>
+							<center><strong>In progress.....</strong>
+								<a name = 'profiler' href = "/StartProfile" target = "_blank">
+									<button name = "Apple" value="profiler">
+										Profile me 
+							      	</button>
+							    </a>
+							</center>
 						</p>
 					</div>
 				</section>

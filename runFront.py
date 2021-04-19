@@ -1,17 +1,34 @@
-from flask import Flask, render_template, url_for, request
+from flask import Flask, render_template, url_for, request, send_from_directory
 from werkzeug.utils import secure_filename
 import sys
 import os
 script_path = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(1, script_path + "/backend/summarization")
+sys.path.insert(2, script_path + "/backend/user profiling")
+from TopicVectorizer import TopicVectorizer
 from qna import getData, getPolicyData
+import csv
+import json
 # from test import randomout
+
+tv = TopicVectorizer.load(script_path+"/backend/user profiling/TopicVectorizer.pkl")
+
+def getList():
+	file = json.load(open(script_path + "/backend/user profiling/Abhinav.json", encoding = "utf-8"))
+	l = list()
+	for i in file:
+		l.append(i['title'])
+	return l
 
 def loadPolicy(policyName):
 	result = getPolicyData(policyName)
 	return render_template("summarizedPolicies.html", result = [policyName, result])
 
 app = Flask(__name__)
+
+# @app.route('/manifest.json')
+# def manifest():
+# 	return send_from_directory('static','manifest.json')
 
 @app.route('/')
 def index():
@@ -28,6 +45,18 @@ def index():
 # @app.route('/no-sidebar')
 # def no_sidebar():
 # 	return render_template("no-sidebar.html")
+
+@app.route('/StartProfile')
+def profiler():
+	l = getList()
+	data = tv.getPreferences(l)
+
+	with open('static/data.csv', 'w', encoding = "utf-8", newline = "") as f:
+		write = csv.writer(f)
+		write.writerow(["Field", "Value"])
+		write.writerows(data)
+
+	return render_template('test.html')
 
 @app.route('/uploader', methods = ['GET', 'POST'])
 def upload_file():

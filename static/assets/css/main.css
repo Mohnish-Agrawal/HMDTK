@@ -2017,7 +2017,7 @@ input, select, textarea {
 			}
 
 		.wrapper.style1 {
-			background: #e97770 url("images/pic06.jpg");
+			background: #e97770;
 			color: #eee;
 			color: rgba(255, 255, 255, 0.75);
 		}
