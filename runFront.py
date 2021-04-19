@@ -5,13 +5,13 @@ import os
 script_path = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(1, script_path + "/backend/summarization")
 sys.path.insert(2, script_path + "/backend/user profiling")
-from TopicVectorizer import TopicVectorizer
+# from TopicVectorizer import TopicVectorizer
 from qna import getData, getPolicyData
 import csv
 import json
 # from test import randomout
 
-tv = TopicVectorizer.load(script_path+"/backend/user profiling/TopicVectorizer.pkl")
+# tv = TopicVectorizer.load(script_path+"/backend/user profiling/TopicVectorizer.pkl")
 
 def getList():
 	file = json.load(open(script_path + "/backend/user profiling/Abhinav.json", encoding = "utf-8"))
@@ -48,13 +48,13 @@ def index():
 
 @app.route('/StartProfile')
 def profiler():
-	l = getList()
-	data = tv.getPreferences(l)
+# 	l = getList()
+# 	data = tv.getPreferences(l)
 
-	with open('static/data.csv', 'w', encoding = "utf-8", newline = "") as f:
-		write = csv.writer(f)
-		write.writerow(["Field", "Value", "Radius","Color"])
-		write.writerows(data)
+# 	with open('static/data.csv', 'w', encoding = "utf-8", newline = "") as f:
+# 		write = csv.writer(f)
+# 		write.writerow(["Field", "Value", "Radius","Color"])
+# 		write.writerows(data)
 
 	return render_template('test.html')
 
