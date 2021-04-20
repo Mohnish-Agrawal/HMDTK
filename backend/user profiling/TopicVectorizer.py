@@ -1,4 +1,4 @@
-from newspaper import Article
+# from newspaper import Article
 import nltk
 import pandas as pd
 from tqdm import tqdm
