@@ -9,6 +9,7 @@ from TopicVectorizer import TopicVectorizer
 from qna import getData, getPolicyData
 import csv
 import json
+import pickle as pkl
 
 
 app = Flask(__name__)
@@ -49,12 +50,13 @@ def index():
 @app.route('/StartProfile')
 def profiler():
 	l = getList()
-	data = TopicVectorizer.load(script_path+"/backend/user profiling/TopicVectorizer.pkl").getPreferences(l)
-
-	with open('static/data.csv', 'w', encoding = "utf-8", newline = "") as f:
-		write = csv.writer(f)
-		write.writerow(["Field", "Value", "Radius","Color"])
-		write.writerows(data)
+	data = pkl.load(open(script_path+"/backend/user profiling/TopicVectorizer.pkl", "rb"))
+	# data = TopicVectorizer.load(script_path+"/backend/user profiling/TopicVectorizer.pkl").getPreferences(l)
+	print(type(data))
+	# with open('static/data.csv', 'w', encoding = "utf-8", newline = "") as f:
+	# 	write = csv.writer(f)
+	# 	write.writerow(["Field", "Value", "Radius","Color"])
+	# 	write.writerows(data)
 
 	return render_template('test.html')
 
@@ -113,5 +115,5 @@ def loadPolicyAmazon():
 #       return 'file uploaded successfully'
 
 if __name__ == '__main__':
-	app.run(threaded = True, port = 5000)
-	# app.run(debug = True)
+	# app.run(threaded = True, port = 5000)
+	app.run(debug = True)
