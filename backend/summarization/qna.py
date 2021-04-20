@@ -50,8 +50,8 @@ def getData(f, saveDoc = True):
     data = dict()
     dataId = 0
     keys = ["Data that is being collected by the company",
-            "Third Parties : Data being shared with third parties",
-            "Tracking : Data being collected from other resources",
+            "Third Parties: Data being shared with third parties",
+            "Tracking: Data being collected from other resources",
             "Protection assurance of the collected data",
             "Retention of data/personal information"
     ]
