@@ -10,22 +10,22 @@ import csv
 import json
 import pickle as pkl
 
-import nltk
-import pandas as pd
-from tqdm import tqdm
-import numpy as np
-import pickle as pkl
-import re
-from nltk.corpus import stopwords
-from nltk.stem import WordNetLemmatizer
-import gensim
-from gensim.utils import simple_preprocess
-import gensim.corpora as corpora
-from sklearn.feature_extraction.text import TfidfVectorizer  
-from sklearn.preprocessing import LabelEncoder
-from sklearn.model_selection import train_test_split
-from sklearn.utils import shuffle
-wordnet_lemmatizer = WordNetLemmatizer()
+# import nltk
+# import pandas as pd
+# from tqdm import tqdm
+# import numpy as np
+# import pickle as pkl
+# import re
+# from nltk.corpus import stopwords
+# from nltk.stem import WordNetLemmatizer
+# import gensim
+# from gensim.utils import simple_preprocess
+# import gensim.corpora as corpora
+# from sklearn.feature_extraction.text import TfidfVectorizer  
+# from sklearn.preprocessing import LabelEncoder
+# from sklearn.model_selection import train_test_split
+# from sklearn.utils import shuffle
+# wordnet_lemmatizer = WordNetLemmatizer()
 
 # class TopicVectorizer(object):
 # 	pass
