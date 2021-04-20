@@ -4,9 +4,9 @@ import pandas as pd
 import numpy as np
 import pickle as pkl
 import re
-nltk.download('punkt')
-nltk.download('stopwords')
-nltk.download('wordnet')
+# nltk.download('punkt')
+# nltk.download('stopwords')
+# nltk.download('wordnet')
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 import gensim
