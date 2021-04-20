@@ -3,7 +3,7 @@
 
 if [ -f bin/install_nltk_data ]; then
 	echo "-----> Running install nltk_data"
-	chmod 777 bin/instal_nltk_data
+	chmod 777 bin/install_nltk_data
 	bin/install_nltk_data
 fi
 
