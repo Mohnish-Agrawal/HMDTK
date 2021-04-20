@@ -59,7 +59,7 @@
 			  overflow-x: scroll;
 			  /*scroll-snap-type: x proximity;*/
 			  padding-bottom: calc(.75 * var(--gutter));
-			  margin-bottom: calc(-.5 * var(--gutter));
+			  margin-bottom: calc(var(--gutter));
 
 			}
 
@@ -83,7 +83,7 @@
 			.app {
 			  width: 100%;
 			  /*height: 400px;*/
-			  overflow-y: scroll;
+			  overflow-y: false;
 			}
 
 
@@ -114,7 +114,7 @@
 			}
 
 			::-webkit-scrollbar{
-				display : none;
+				display : true;
 			}
 
 			input [type = file]{
