@@ -1,12 +1,10 @@
+from newspaper import Article
 import nltk
 import pandas as pd
-# from tqdm import tqdm
+from tqdm import tqdm
 import numpy as np
 import pickle as pkl
 import re
-# nltk.download('punkt')
-# nltk.download('stopwords')
-# nltk.download('wordnet')
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 import gensim
@@ -17,13 +15,10 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
 from sklearn.utils import shuffle
 wordnet_lemmatizer = WordNetLemmatizer()
-import random
-
 
 class TopicVectorizer:
 
     def __init__(self, model, label_encoder, tfid):
-        random.seed(42)
         self.model = model
         self.label_encoder = label_encoder
         self.tfid = tfid
@@ -42,14 +37,14 @@ class TopicVectorizer:
     def lemmatize_stemming(self, text):
         return ' '.join([WordNetLemmatizer().lemmatize(word, pos='v') for word in text])
 
-    # def urls_to_text(self, urls):
-    #     texts = []
-    #     for url in tqdm(urls, total=len(urls)):
-    #         article = Article(url)
-    #         article.download()
-    #         article.parse()
-    #         texts.append(article.text)
-    #     return ' '.join(texts)
+    def urls_to_text(self, urls):
+        texts = []
+        for url in tqdm(urls, total=len(urls)):
+            article = Article(url)
+            article.download()
+            article.parse()
+            texts.append(article.text)
+        return ' '.join(texts)
 
     def id_to_labels(self, ids):
         return self.label_encoder.inverse_transform(ids)
@@ -74,7 +69,6 @@ class TopicVectorizer:
                     break
             result_list.append([labels[i],result[0,i], int(percentage),color])
         return result_list
-        
 
     def transform(self, series):
         processed = series.map(self.sent_to_words)
