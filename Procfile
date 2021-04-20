@@ -1,2 +1,2 @@
-web: gunicorn runFront:app
+web: gunicorn --log-file=- runFront:app
 
