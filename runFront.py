@@ -27,8 +27,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.utils import shuffle
 wordnet_lemmatizer = WordNetLemmatizer()
 
-class TopicVectorizer(object):
-	pass
+# class TopicVectorizer(object):
+# 	pass
 #     def __init__(self, model, label_encoder, tfid):
 #         self.model = model
 #         self.label_encoder = label_encoder
