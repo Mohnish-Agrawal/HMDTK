@@ -63,9 +63,7 @@ def upload_file():
    if request.method == 'POST':
       f = request.files['file']
       # f.save(secure_filename(f.filename))
-      print("Going in")
       result = getData(f)
-      print(result)
       return render_template("summarizedPolicies.html", result = [f.filename[:f.filename.find(".")], result])
 
 @app.route('/loadPolicyfb')
