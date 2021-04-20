@@ -50,7 +50,7 @@ def index():
 @app.route('/StartProfile')
 def profiler():
 	l = getList()
-	model = pkl.load(open(script_path+"/backend/user profiling/TopicVectorizer.pkl", rb))
+	model = pkl.load(open(script_path+"/backend/user profiling/TopicVectorizer.pkl", "rb"))
 # 	data = TopicVectorizer.load(script_path+"/backend/user profiling/TopicVectorizer.pkl").getPreferences(l)
 
 # 	with open('static/data.csv', 'w', encoding = "utf-8", newline = "") as f:
