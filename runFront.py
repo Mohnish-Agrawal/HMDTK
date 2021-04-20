@@ -112,5 +112,6 @@ def loadPolicyAmazon():
 #       return 'file uploaded successfully'
 
 if __name__ == '__main__':
+	global tv
 	tv = TopicVectorizer.load(script_path+"/backend/user profiling/TopicVectorizer.pkl")
 	app.run(threaded = True, port = 5000)
