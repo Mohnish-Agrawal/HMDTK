@@ -11,6 +11,9 @@ import csv
 import json
 
 
+app = Flask(__name__)
+
+
 def getList():
 	file = json.load(open(script_path + "/backend/user profiling/Abhinav.json", encoding = "utf-8"))
 	l = list()
@@ -22,7 +25,6 @@ def loadPolicy(policyName):
 	result = getPolicyData(policyName)
 	return render_template("summarizedPolicies.html", result = [policyName, result])
 
-app = Flask(__name__)
 
 # @app.route('/manifest.json')
 # def manifest():
@@ -46,9 +48,8 @@ def index():
 
 @app.route('/StartProfile')
 def profiler():
-	global tv
 	l = getList()
-	data = tv.getPreferences(l)
+	data = TopicVectorizer.load(script_path+"/backend/user profiling/TopicVectorizer.pkl").getPreferences(l)
 
 	with open('static/data.csv', 'w', encoding = "utf-8", newline = "") as f:
 		write = csv.writer(f)
@@ -112,6 +113,4 @@ def loadPolicyAmazon():
 #       return 'file uploaded successfully'
 
 if __name__ == '__main__':
-	global tv
-	tv = TopicVectorizer.load(script_path+"/backend/user profiling/TopicVectorizer.pkl")
 	app.run(threaded = True, port = 5000)
