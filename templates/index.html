@@ -812,12 +812,48 @@
 					<div class="title">User profiling</div>
 					<div class="container">
 						<p>
-							<center><strong>In progress.....</strong>
-								<a name = 'profiler' href = "/StartProfile" target = "_blank">
-									<button name = "Apple" value="profiler">
+							<center>
+								Now that you know what all data is collected by these companies, one question remains - <br><strong>How does this matter to me?</strong>
+							</center>
+						</p>
+						<p> 
+							Your data — the abstract portrait of who you are, and, more importantly, of who you are compared with other people — is your real vulnerability. Not only your identity may get compromised online, but also it might change the way you interact with the internet
+						</p>
+						<p>
+							What these companies are doing is building little models, AKA, little avatars of you. Your avatar sits in the cloud, and they are trying to find what makes you use their product or service more, or which personalized advertisement of a third-party might make you buy its product. This is what we call <i>"User Profiling"</i>
+						</p>
+						<p>
+							One of the ways to profile users is to try and collect users' search history through cookies. We will not be getting into how this works. What we would really like to show you is the extent of information that can be gathered about you just by using your search history.
+						</p>
+						<p>
+							We have developed a system which can tell us about your interests. It's a very simplified model of what all big tech companies do. If you would like to see it work, you will have to provide us with your search history. And don't worry, all the data that you provide will be deleted once you leave this website.
+						</p>
+						<p>
+							Please follow the steps provided below to get your search history:
+							<ul>
+								<li>Add this extension to your browser - <a href = "https://chrome.google.com/webstore/detail/export-historybookmarks-t/dcoegfodcnjofhjfbhegcgjgapeichlf?hl=en">Export History/Bookmarks to JSON/CSV*/XLS*</a></li>
+								<li>You can view your extensions on top right corner of the screen. The icon looks like a puzzle </li>
+								<li>Click on the Export History/Bookmarks extension and then click on <strong><i>chrome history.json button</i></strong></li>
+								<li>A file named chrome_history.json should be downloaded. You can upload this file by clicking on <i><strong>Profile me</strong> </i>button given below</li>
+							</ul>
+						</p>
+							<br>
+						<p>
+							<center>
+								<form action="/StartProfile" method="POST" enctype="multipart/form-data" target = "_blank">
+							      	<label style="align-items: center;border-radius: 5px;color: white;width: 10rem;background-color: #ff6e6e;height: 3rem;justify-content: center;display: flex;box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);">
+							      		<!-- <i class="fas fa-cloud-upload-alt fa-6x" style="color: black;"></i> -->
+							      		Profile me
+							      		<input type = "file" name = "file" size = "1" style = "opacity:0; top:0; bottom:0; left:0; right:0; position: absolute;" onchange ="this.form.submit();"/>
+							      		<!-- </input> -->
+							      	</label>
+								      	<!-- <input type = "submit"/> -->
+								</form>
+								<!-- <a name = 'profiler' href = "/StartProfile" target = "_blank">
+									<button name = "profiler_button" value="profiler">
 										Profile me 
 							      	</button>
-							    </a>
+							    </a> -->
 							</center>
 						</p>
 					</div>

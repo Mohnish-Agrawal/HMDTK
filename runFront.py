@@ -9,12 +9,14 @@ from qna import getData, getPolicyData
 import csv
 import json
 import pickle as pkl
+from TopicVectorizer import TopicVectorizer
 
 app = Flask(__name__)
 
 
-def getList():
-	file = json.load(open(script_path + "/backend/user profiling/Abhinav.json", encoding = "utf-8"))
+def getList(file):
+	file = json.load(open(file, encoding = "utf-8"))
+	# print("chrome_history.json")
 	l = list()
 	for i in file:
 		l.append(i['title'])
@@ -45,26 +47,30 @@ def index():
 # def no_sidebar():
 # 	return render_template("no-sidebar.html")
 
-@app.route('/StartProfile')
+@app.route('/StartProfile', methods = ['GET', 'POST'])
 def profiler():
-	l = getList()
-	data = pkl.load(open(script_path+"/backend/user profiling/TopicVectorizer.pkl", "rb"))
-	# data = TopicVectorizer.load(script_path+"/backend/user profiling/TopicVectorizer.pkl").getPreferences(l)
-	print(type(data))
-	# with open('static/data.csv', 'w', encoding = "utf-8", newline = "") as f:
-	# 	write = csv.writer(f)
-	# 	write.writerow(["Field", "Value", "Radius","Color"])
-	# 	write.writerows(data)
+	if request.method == 'POST':
+		f = request.files['file']
+		f.save(secure_filename(f.filename))
+		l = getList(secure_filename(f.filename))
+		# data = pkl.load(open(script_path+"/backend/user profiling/TopicVectorizer.pkl", "rb"))
+		data = TopicVectorizer.load(script_path+"/backend/user profiling/TopicVectorizer.pkl").getPreferences(l)
+		topics = sorted(data, key = lambda x: x[2], reverse = True)[:5]
+		# print(type(data))
+		# with open('templates/data.csv', 'w', encoding = "utf-8", newline = "") as f:
+		# 	write = csv.writer(f)
+		# 	write.writerow(["Field", "Value", "Radius","Color"])
+		# 	write.writerows(data)
 
-	return render_template('test.html')
+		return render_template('test.html', data = data, topics = topics)
 
 @app.route('/uploader', methods = ['GET', 'POST'])
 def upload_file():
-   if request.method == 'POST':
-      f = request.files['file']
-      # f.save(secure_filename(f.filename))
-      result = getData(f)
-      return render_template("summarizedPolicies.html", result = [f.filename[:f.filename.find(".")], result])
+	if request.method == 'POST':
+		f = request.files['file']
+	  # f.save(secure_filename(f.filename))
+		result = getData(f)
+		return render_template("summarizedPolicies.html", result = [f.filename[:f.filename.find(".")], result])
 
 @app.route('/loadPolicyfb')
 def loadPolicyfb():

@@ -23,7 +23,7 @@
 	var radiusScale = d3.scaleSqrt().domain([0,100]).range([30,100])
 
 	d3.queue()
-		.defer(d3.csv, "static/data.csv")
+		.defer(d3.csv, "data.csv")
 		.await(ready)
 
 	function ready(error, datapoints) {

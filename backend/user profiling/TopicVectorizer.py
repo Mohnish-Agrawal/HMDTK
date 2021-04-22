@@ -58,16 +58,24 @@ class TopicVectorizer:
         result = self.transform_urls(series)
         labels = self.id_to_labels(range(len(result[0])))
         result_list = list()
-        color_dict = {20:"#A8E6CE", 40:"#DCEDC2", 60:"#FFD3B5", 80:"#FFAA6", 100: "#FF8C94"}
+        result_dict = dict()
+        color_dict = {20:"#A8E6CE", 40:"#DCEDC2", 60:"#FFD3B5", 80:"#FFAA66", 100: "#FF8C94"}
+        nodes = 0
         for i in range(len(labels)):
             percentage = result[0,i]/max(result[0])*100
             color = ""
-            radius = 100
             for k in color_dict: 
                 if k - percentage >= 0 and k - percentage <= 20:
                     color = color_dict[k]
                     break
             result_list.append([labels[i],result[0,i], int(percentage),color])
+            result_dict[nodes] = {"label":labels[i], "value":result[0,i], "radius":int(percentage),"color":color}
+            # result_dict["label"] = labels[i]
+            # result_dict["value"] = result[0,i]
+            # result_dict["radius"] = int(percentage)
+            # result_dict["color"] = color
+            nodes += 1
+
         return result_list
 
     def transform(self, series):

@@ -2,12 +2,124 @@
 <HTML>
 	<HEAD>
 		<!-- <link rel="manifest" href="manifest.json"> -->
-	</HEAD>
-	<BODY>
-
+		<style type="text/css">
+			ul li{
+			margin: auto;
+			list-style-type: circle;
+    		margin-left: 2em;
+    		color:black;
+		}
+		</style>
 		<script src="https://d3js.org/d3.v4.min.js"></script>
-		<div id="chart">
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{{url_for('static', filename = 'assets/css/main.css')}}" />
+	</HEAD>
+	<BODY class="homepage is-preload">
+		<div id = "page-wrapper">
+			<section id = "header" class = "wrapper" style="height: 10rem;">
+				<div id = "logo">
+					<h1>Your Profile</h1>
+				</div>
+			</section>
+			<section class = "wrapper style3">
+				<div class = "container">
+					<p style="color: black;">
+						The Top 5 topics that you are most interested in according to your search history is given below:
+						<ul>
+							{% for label in topics %}
+							<li>
+								{{label.0}}
+							</li>
+							{% endfor %}
+						</ul> 
+					</p>
+					<p style="color: black;">
+						You can also view a bubble chart for the same. The size of the bubble depicts your interest in a topic. The more interested you are in that topic, the bigger that bubble is. 
+					</p>
+					<center>
+						<div id="chart" class = "container">
+							<script type="text/javascript">
+							var dataObj = {{data|tojson}};
+							// console.log(dataObj)
+
+							var width = 700,
+							height = 700;
+							
+							var simulation = d3.forceSimulation()
+								.force("x", d3.forceX(width/2).strength(0.05))
+								.force("y", d3.forceY(height/2).strength(0.05))
+								.force("collide", d3.forceCollide(function (d){
+									return radiusScale(d[2]);
+								}))
+								
+
+							var radiusScale = d3.scaleSqrt().domain([0,100]).range([20,100])
+
+							var svg = d3.select("#chart")
+								.append("svg")
+								.attr("height", height)
+								.attr("width", width)
+								// .attr("class","names")
+								.append("g")
+								.attr("transform", "translate(0,0)")
+
+								// svg.selectAll(".names").data(dataObj).enter().append("circle").attr("class","names").attr("r", function(d){
+								// 	console.log(d[2]);
+								// 	return d[2];
+								// })
+								console.log("Passing this");
+
+							//simulations - collection of forces - how circles interact
+							//get them to middle
+							//don't collide
+
+							// console.log(data);
+
+							circles = svg.selectAll(".names")
+								.data(dataObj)
+								.enter().append("circle")
+								.attr("class", "names")
+								.attr("r", function(d){
+									return radiusScale(d[2]);
+								}) 
+								.attr("fill",function(d){
+									return d[3];
+								})
+
+							var texts = svg.selectAll(null)
+								.data(dataObj)
+								.enter()
+								.append('text')
+								.attr("text-anchor", "middle")
+								.text(d => d[0])
+								.attr('fill', 'black')
+								.attr('font-size', 10)
+
+							simulation.nodes(dataObj)
+							.on('tick', ticked)
+							function ticked() {
+								circles
+									.attr("cx", function(d){
+										return d.x
+									})
+									.attr("cy", function(d) {
+										return d.y
+									})
+								texts
+									.attr("y", function(d){
+										return d.y
+									})
+									.attr("x", function(d){
+										return d.x
+									})
+							}
+							</script>
+						</div>
+					</center>
+				</div>
+			</section>
+		<!-- <script src = "{{url_for('static', filename = 'assets/js/bubbles.js')}}"></script> -->
 		</div>
-		<script src = "{{url_for('static', filename = 'assets/js/bubbles.js')}}"></script>
 	</BODY>
 </HTML>
